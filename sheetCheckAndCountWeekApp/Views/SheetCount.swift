@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SheetCount.swift
 //  sheetCheckAndCountWeekApp
 //
 //  Created by Shinichiro Hirasawa on 2021/10/18.
@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct SheetCount: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Text("シート計算ページです")
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SheetCount_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        SheetCount()
     }
 }
