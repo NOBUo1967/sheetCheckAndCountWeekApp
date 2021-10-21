@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-//extension UIApplication {
-//    func closeKeyboard() {
-//        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//    }
-//}
-
 extension UIApplication {
     func endEditing() {
         sendAction(#selector(UIResponder.resignFirstResponder),to: nil, from: nil,for: nil)
@@ -20,15 +14,15 @@ extension UIApplication {
 }
 
 struct SheetCount: View {
-    @State var dairyDose = 0
-    @State var numberOfDay = 0
+    @State var dairyDose = ""
+    @State var numberOfDay = ""
     @State var total = 0
     
     var body: some View {
         VStack {
             HStack {
                 Text("1日必要錠(包)数")
-                TextField("錠", value: self.$dairyDose, formatter: NumberFormatter()) // TextField
+                TextField("錠", text: self.$dairyDose) // TextField
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
             } // Hstack
@@ -36,21 +30,19 @@ struct SheetCount: View {
             
             HStack {
                 Text("日数")
-                TextField("日", value: self.$numberOfDay, formatter: NumberFormatter()) // TextField
+                TextField("日", text: self.$numberOfDay) // TextField
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
             } // Hstack
             .padding()
             
             Button(action: {
-                print($dairyDose)
-                print($numberOfDay)
-                self.total = self.dairyDose * self.numberOfDay
-                UIApplication.shared.endEditing()
+                self.total = Int(self.dairyDose)! * Int(self.numberOfDay)!
                 
+                UIApplication.shared.endEditing()
             }) {
                 Text("計算")
-            }
+            } //Button
             .padding()
             Text("\(self.total)")
         } // VStack
