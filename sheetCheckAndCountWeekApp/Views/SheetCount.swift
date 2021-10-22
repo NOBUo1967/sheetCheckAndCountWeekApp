@@ -16,7 +16,9 @@ extension UIApplication {
 struct SheetCount: View {
     @State var dairyDose = ""
     @State var numberOfDay = ""
+    @State var numberPerSheet = ""
     @State var total = 0
+    @State var fraction = 0
     
     var body: some View {
         VStack {
@@ -25,7 +27,7 @@ struct SheetCount: View {
                 TextField("錠", text: self.$dairyDose) // TextField
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
-            } // Hstack
+            } // Hstack 1日必要錠(包)数
             .padding()
             
             HStack {
@@ -33,18 +35,28 @@ struct SheetCount: View {
                 TextField("日", text: self.$numberOfDay) // TextField
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.numberPad)
+            } // Hstack 日数
+            .padding()
+
+            HStack {
+                Text("1シート(つづり)あたりの錠(包)数")
+                TextField("錠", text: self.$numberPerSheet) // TextField
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.numberPad)
             } // Hstack
             .padding()
             
             Button(action: {
-                self.total = Int(self.dairyDose)! * Int(self.numberOfDay)!
+                self.total = Int(self.dairyDose)! * Int(self.numberOfDay)! / Int(self.numberPerSheet)!
+                self.fraction = Int(self.dairyDose)! * Int(self.numberOfDay)! % Int(self.numberPerSheet)!
                 
                 UIApplication.shared.endEditing()
             }) {
                 Text("計算")
             } //Button
             .padding()
-            Text("\(self.total)")
+            Text("必要なヒートは\n\(self.total)シート\n+\(self.fraction)錠です")
+//                .lineLimit(0)
         } // VStack
     }
 }
