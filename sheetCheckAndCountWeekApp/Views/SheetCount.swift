@@ -18,7 +18,7 @@ struct SheetCount: View {
     @State var numberOfDay = ""
     @State var numberPerSheet = ""
     @State var total = 0
-    @State var fraction = 0
+    @State var fraction = 0.0
     
     var body: some View {
         VStack {
@@ -26,7 +26,7 @@ struct SheetCount: View {
                 Text("1日必要錠(包)数")
                 TextField("錠", text: self.$dairyDose) // TextField
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
+                .keyboardType(.decimalPad)
             } // Hstack 1日必要錠(包)数
             .padding()
             
@@ -47,8 +47,10 @@ struct SheetCount: View {
             .padding()
             
             Button(action: {
-                self.total = Int(self.dairyDose)! * Int(self.numberOfDay)! / Int(self.numberPerSheet)!
-                self.fraction = Int(self.dairyDose)! * Int(self.numberOfDay)! % Int(self.numberPerSheet)!
+                // 必要シート数が小数点になることはありえないのでInt型にキャストしている
+                self.total = Int(Double(self.dairyDose)! * Double(self.numberOfDay)! / Double(self.numberPerSheet)!)
+                // 端数の錠数
+                self.fraction = (Double(self.dairyDose)! * Double(self.numberOfDay)!).truncatingRemainder(dividingBy: Double(self.numberPerSheet)!)
                 
                 UIApplication.shared.endEditing()
             }) {
