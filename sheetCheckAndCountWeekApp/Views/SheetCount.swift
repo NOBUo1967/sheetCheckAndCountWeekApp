@@ -57,7 +57,8 @@ struct SheetCount: View {
                 Text("計算")
             } //Button
             .padding()
-            Text("必要なヒートは\n\(self.total)シート\n+\(self.fraction)錠です")
+            // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
+            Text("必要なヒートは\n\(self.total)シート\n+\(String(format: "%.2f", self.fraction))錠です")
 //                .lineLimit(0)
         } // VStack
     }
