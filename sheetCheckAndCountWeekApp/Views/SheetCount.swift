@@ -18,7 +18,7 @@ struct SheetCount: View {
     @State var numberOfDay = ""
     @State var numberPerSheet = ""
     @State var total = 0
-    @State var fraction = 0
+    @State var fraction = 0.0
     
     var body: some View {
         VStack {
@@ -26,7 +26,7 @@ struct SheetCount: View {
                 Text("1日必要錠(包)数")
                 TextField("錠", text: self.$dairyDose) // TextField
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
+                .keyboardType(.decimalPad)
             } // Hstack 1日必要錠(包)数
             .padding()
             
@@ -47,15 +47,18 @@ struct SheetCount: View {
             .padding()
             
             Button(action: {
-                self.total = Int(self.dairyDose)! * Int(self.numberOfDay)! / Int(self.numberPerSheet)!
-                self.fraction = Int(self.dairyDose)! * Int(self.numberOfDay)! % Int(self.numberPerSheet)!
+                // 必要シート数が小数点になることはありえないのでInt型にキャストしている
+                self.total = Int(Double(self.dairyDose)! * Double(self.numberOfDay)! / Double(self.numberPerSheet)!)
+                // 端数の錠数
+                self.fraction = (Double(self.dairyDose)! * Double(self.numberOfDay)!).truncatingRemainder(dividingBy: Double(self.numberPerSheet)!)
                 
                 UIApplication.shared.endEditing()
             }) {
                 Text("計算")
             } //Button
             .padding()
-            Text("必要なヒートは\n\(self.total)シート\n+\(self.fraction)錠です")
+            // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
+            Text("必要なヒートは\n\(self.total)シート\n+\(String(format: "%.2f", self.fraction))錠です")
 //                .lineLimit(0)
         } // VStack
     }
