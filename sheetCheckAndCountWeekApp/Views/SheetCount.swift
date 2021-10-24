@@ -24,34 +24,42 @@ struct SheetCount: View {
         VStack {
             HStack {
                 Text("1日必要錠(包)数")
-                TextField("錠", text: self.$dairyDose) // TextField
+                TextField("錠", text: self.$dairyDose)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.decimalPad)
+                .keyboardType(.decimalPad) // TextField
             } // Hstack 1日必要錠(包)数
             .padding()
             
             HStack {
                 Text("日数")
-                TextField("日", text: self.$numberOfDay) // TextField
+                TextField("日", text: self.$numberOfDay)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
+                .keyboardType(.numberPad) // TextField
             } // Hstack 日数
             .padding()
 
             HStack {
                 Text("1シート(つづり)あたりの錠(包)数")
-                TextField("錠", text: self.$numberPerSheet) // TextField
+                TextField("錠", text: self.$numberPerSheet)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
+                .keyboardType(.numberPad) // TextField
             } // Hstack
             .padding()
             
             Button(action: {
+                // キャストしてOptional型にしておかないとif let文で、nilチェックできないため、ここで値をDouble型にキャストしておく
+                let dairyDoseDouble:Double? = Double(dairyDose)
+                // 各値のnilチェックと空文字チェック
+                if let dairyDose = dairyDoseDouble {
+                    self.total = Int(dairyDose)
+                } else {
+                    print("値を入力してください")
+                }
                 // 必要シート数が小数点になることはありえないのでInt型にキャストしている
-                self.total = Int(Double(self.dairyDose)! * Double(self.numberOfDay)! / Double(self.numberPerSheet)!)
-                // 端数の錠数
-                self.fraction = (Double(self.dairyDose)! * Double(self.numberOfDay)!).truncatingRemainder(dividingBy: Double(self.numberPerSheet)!)
-                
+//                self.total = Int(Double(self.dairyDose)! * Double(self.numberOfDay)! / Double(self.numberPerSheet)!)
+//                // 端数の錠数
+//                self.fraction = (Double(self.dairyDose)! * Double(self.numberOfDay)!).truncatingRemainder(dividingBy: Double(self.numberPerSheet)!)
+//
                 UIApplication.shared.endEditing()
             }) {
                 Text("計算")
