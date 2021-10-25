@@ -14,43 +14,57 @@ extension UIApplication {
 }
 
 struct SheetCount: View {
-    @State var dairyDose = ""
-    @State var numberOfDay = ""
-    @State var numberPerSheet = ""
-    @State var total = 0
-    @State var fraction = 0.0
+    // 各入力値。TextFieldから値を受け取るためString型とする
+    @State var dairyDose: String = ""
+    @State var numberOfDay: String = ""
+    @State var numberPerSheet: String = ""
+    // 必要ヒート数。整数値しかありえないためInt型とする
+    @State var total: Int = 0
+    // あまり錠数。端数はあり得るためDouble型とする
+    @State var fraction: Double = 0.0
+    
+    //　アラート表示のための状態変数
+    @State var showAlert:Bool = false
     
     var body: some View {
         VStack {
             HStack {
                 Text("1日必要錠(包)数")
-                TextField("錠", text: self.$dairyDose) // TextField
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.decimalPad)
+                TextField("錠", text: self.$dairyDose)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad) // TextField
             } // Hstack 1日必要錠(包)数
             .padding()
             
             HStack {
                 Text("日数")
-                TextField("日", text: self.$numberOfDay) // TextField
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
+                TextField("日", text: self.$numberOfDay)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad) // TextField
             } // Hstack 日数
             .padding()
-
+            
             HStack {
-                Text("1シート(つづり)あたりの錠(包)数")
-                TextField("錠", text: self.$numberPerSheet) // TextField
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)
+                Text("1シート(つづり)あたりの\n錠(包)数")
+                TextField("錠", text: self.$numberPerSheet)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad) // TextField
             } // Hstack
             .padding()
             
             Button(action: {
-                // 必要シート数が小数点になることはありえないのでInt型にキャストしている
-                self.total = Int(Double(self.dairyDose)! * Double(self.numberOfDay)! / Double(self.numberPerSheet)!)
-                // 端数の錠数
-                self.fraction = (Double(self.dairyDose)! * Double(self.numberOfDay)!).truncatingRemainder(dividingBy: Double(self.numberPerSheet)!)
+                // キャストしてOptional型にしておかないとif let文で、nilチェックできないため、ここで値をDouble型にキャストしておく
+                let dairyDoseDouble:Double? = Double(dairyDose)
+                let numberOfDayDouble:Double? = Double(numberOfDay)
+                let numberPerSheetDouble: Double? = Double(numberPerSheet)
+                // 各値のnilチェックと空文字チェック
+                if let dairyDose = dairyDoseDouble, let numberOfDay = numberOfDayDouble, let numberPerSheet = numberPerSheetDouble, numberPerSheet != 0 {
+                    self.total = Int(dairyDose * numberOfDay / numberPerSheet)
+                    self.fraction = (dairyDose * numberOfDay).truncatingRemainder(dividingBy: numberPerSheet)
+                    print(total)
+                } else {
+                    showAlert = true
+                }
                 
                 UIApplication.shared.endEditing()
             }) {
@@ -59,8 +73,10 @@ struct SheetCount: View {
             .padding()
             // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
             Text("必要なヒートは\n\(self.total)シート\n+\(String(format: "%.2f", self.fraction))錠です")
-//                .lineLimit(0)
         } // VStack
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("正しい値を入力してください"), message: Text("入力できる値は数値のみです\n1シートあたりの錠数に０は入力できません"), dismissButton: .default(Text("OK")))
+        }
     }
 }
 
