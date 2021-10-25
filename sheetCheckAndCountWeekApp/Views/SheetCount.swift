@@ -14,11 +14,14 @@ extension UIApplication {
 }
 
 struct SheetCount: View {
-    @State var dairyDose = ""
-    @State var numberOfDay = ""
-    @State var numberPerSheet = ""
-    @State var total = 0
-    @State var fraction = 0.0
+    // 各入力値。TextFieldから値を受け取るためString型とする
+    @State var dairyDose: String = ""
+    @State var numberOfDay: String = ""
+    @State var numberPerSheet: String = ""
+    // 必要ヒート数。整数値しかありえないためInt型とする
+    @State var total: Int = 0
+    // あまり錠数。端数はあり得るためDouble型とする
+    @State var fraction: Double = 0.0
     
     var body: some View {
         VStack {
@@ -49,17 +52,17 @@ struct SheetCount: View {
             Button(action: {
                 // キャストしてOptional型にしておかないとif let文で、nilチェックできないため、ここで値をDouble型にキャストしておく
                 let dairyDoseDouble:Double? = Double(dairyDose)
+                let numberOfDayDouble:Double? = Double(numberOfDay)
+                let numberPerSheetDouble: Double? = Double(numberPerSheet)
                 // 各値のnilチェックと空文字チェック
-                if let dairyDose = dairyDoseDouble {
-                    self.total = Int(dairyDose)
+                if let dairyDose = dairyDoseDouble, let numberOfDay = numberOfDayDouble, let numberPerSheet = numberPerSheetDouble, numberPerSheet != 0 {
+                    self.total = Int(dairyDose * numberOfDay / numberPerSheet)
+                    self.fraction = (dairyDose * numberOfDay).truncatingRemainder(dividingBy: numberPerSheet)
+                    print(total)
                 } else {
                     print("値を入力してください")
                 }
-                // 必要シート数が小数点になることはありえないのでInt型にキャストしている
-//                self.total = Int(Double(self.dairyDose)! * Double(self.numberOfDay)! / Double(self.numberPerSheet)!)
-//                // 端数の錠数
-//                self.fraction = (Double(self.dairyDose)! * Double(self.numberOfDay)!).truncatingRemainder(dividingBy: Double(self.numberPerSheet)!)
-//
+
                 UIApplication.shared.endEditing()
             }) {
                 Text("計算")
