@@ -23,29 +23,32 @@ struct SheetCount: View {
     // あまり錠数。端数はあり得るためDouble型とする
     @State var fraction: Double = 0.0
     
+    //　アラート表示のための状態変数
+    @State var showAlert:Bool = false
+    
     var body: some View {
         VStack {
             HStack {
                 Text("1日必要錠(包)数")
                 TextField("錠", text: self.$dairyDose)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.decimalPad) // TextField
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad) // TextField
             } // Hstack 1日必要錠(包)数
             .padding()
             
             HStack {
                 Text("日数")
                 TextField("日", text: self.$numberOfDay)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad) // TextField
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad) // TextField
             } // Hstack 日数
             .padding()
-
+            
             HStack {
-                Text("1シート(つづり)あたりの錠(包)数")
+                Text("1シート(つづり)あたりの\n錠(包)数")
                 TextField("錠", text: self.$numberPerSheet)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad) // TextField
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad) // TextField
             } // Hstack
             .padding()
             
@@ -60,9 +63,9 @@ struct SheetCount: View {
                     self.fraction = (dairyDose * numberOfDay).truncatingRemainder(dividingBy: numberPerSheet)
                     print(total)
                 } else {
-                    print("値を入力してください")
+                    showAlert = true
                 }
-
+                
                 UIApplication.shared.endEditing()
             }) {
                 Text("計算")
@@ -70,8 +73,10 @@ struct SheetCount: View {
             .padding()
             // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
             Text("必要なヒートは\n\(self.total)シート\n+\(String(format: "%.2f", self.fraction))錠です")
-//                .lineLimit(0)
         } // VStack
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("正しい値を入力してください"), message: Text("入力できる値は数値のみです\n1シートあたりの錠数に０は入力できません"), dismissButton: .default(Text("OK")))
+        }
     }
 }
 
