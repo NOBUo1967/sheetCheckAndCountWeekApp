@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct WeekCount: View {
+    @State var startDate = Date()
+    @State var endDate = Date()
+    
     var body: some View {
-        Text("週数カウントページです")
+        Form {
+            DatePicker("開始日", selection: $startDate, displayedComponents: .date)
+                .environment(\.locale, Locale(identifier: "ja_JP"))
+            DatePicker("終了日", selection: $endDate, displayedComponents: .date)
+                .environment(\.locale, Locale(identifier: "ja_JP"))
+            
+            Text("original: \(startDate.description)")
+            Text("original: \(endDate.description)")
+        }
     }
 }
 
