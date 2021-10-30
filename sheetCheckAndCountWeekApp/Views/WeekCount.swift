@@ -7,37 +7,18 @@
 
 import SwiftUI
 
-//extension UIApplication {
-//    func dissmissKeyboard() {
-//        sendAction(#selector(UIResponder.resignFirstResponder),to: nil, from: nil,for: nil)
-//    }
-//}
-
 struct WeekCount: View {
     @State private var startDate = Date()
     @State private var endDate = Date()
-//    @State private var span = Date()
-    
-//    func dissmissKeyboard() {
-//        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//    }
     
     
     var body: some View {
         Form {
             DatePicker("開始日", selection: $startDate, displayedComponents: .date)
                 .environment(\.locale, Locale(identifier: "ja_JP"))
-//                .onChange(of: startDate) { startDate in
-//                    print(startDate)
-//                }
-//                .onChange(of: startDate, perform: {
-//                    UIApplication.shared.dissmissKeyboard()
-//                })
             DatePicker("終了日", selection: $endDate, displayedComponents: .date)
                 .environment(\.locale, Locale(identifier: "ja_JP"))
             
-            Text("original: \(startDate.description)")
-            Text("original: \(endDate.description)")
             Text("\(startDate.description)から\(endDate.description)は\(calclateSpan(startDate: self.startDate, endDate: self.endDate))日")
         } // Form
     } // body
