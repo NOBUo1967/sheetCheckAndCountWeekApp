@@ -26,7 +26,6 @@ struct WeekCount: View {
         Form {
             DatePicker("開始日", selection: $startDate, displayedComponents: .date)
                 .environment(\.locale, Locale(identifier: "ja_JP"))
-                .datePickerStyle(WheelDatePickerStyle())
 //                .onChange(of: startDate) { startDate in
 //                    print(startDate)
 //                }
