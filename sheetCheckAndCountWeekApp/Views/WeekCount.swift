@@ -11,6 +11,16 @@ struct WeekCount: View {
     @State private var startDate = Date()
     @State private var endDate = Date()
     
+    var dateFormat: DateFormatter {
+            let format = DateFormatter()
+            format.dateStyle = .full
+            format.timeStyle = .full
+            format.locale = Locale(identifier: "ja_JP")
+            format.calendar = Calendar(identifier: .japanese)
+            format.dateFormat = DateFormatter.dateFormat(fromTemplate: "yyyyMMdd", options: 0, locale: Locale(identifier: "ja_JP"))
+            return format
+        }
+    
     
     var body: some View {
         Form {
@@ -19,7 +29,7 @@ struct WeekCount: View {
             DatePicker("終了日", selection: $endDate, displayedComponents: .date)
                 .environment(\.locale, Locale(identifier: "ja_JP"))
             
-            Text("\(startDate.description)から\(endDate.description)は\(calclateSpan(startDate: self.startDate, endDate: self.endDate))日")
+            Text("\(startDate, formatter: dateFormat)から\(endDate, formatter: dateFormat)は\(calclateSpan(startDate: self.startDate, endDate: self.endDate))日")
         } // Form
     } // body
     
