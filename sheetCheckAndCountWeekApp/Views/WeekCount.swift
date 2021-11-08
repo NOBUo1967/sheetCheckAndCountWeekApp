@@ -7,40 +7,32 @@
 
 import SwiftUI
 
-//extension UIApplication {
-//    func dissmissKeyboard() {
-//        sendAction(#selector(UIResponder.resignFirstResponder),to: nil, from: nil,for: nil)
-//    }
-//}
-
 struct WeekCount: View {
     @State private var startDate = Date()
     @State private var endDate = Date()
-//    @State private var span = Date()
-    
-//    func dissmissKeyboard() {
-//        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//    }
-    
     
     var body: some View {
-        Form {
-            DatePicker("開始日", selection: $startDate, displayedComponents: .date)
+        VStack {
+            // 日付を選択する領域
+            Text("服用開始日").font(.title2)
+            DatePicker("服用開始日", selection: $startDate, displayedComponents: .date)
                 .environment(\.locale, Locale(identifier: "ja_JP"))
-//                .onChange(of: startDate) { startDate in
-//                    print(startDate)
-//                }
-//                .onChange(of: startDate, perform: {
-//                    UIApplication.shared.dissmissKeyboard()
-//                })
-            DatePicker("終了日", selection: $endDate, displayedComponents: .date)
-                .environment(\.locale, Locale(identifier: "ja_JP"))
+                .labelsHidden()
+                .padding(.bottom, 30)
             
-            Text("original: \(startDate.description)")
-            Text("original: \(endDate.description)")
-            Text("\(startDate.description)から\(endDate.description)は\(calclateSpan(startDate: self.startDate, endDate: self.endDate))日")
-        } // Form
+            Text("次回受診日").font(.title2)
+            DatePicker("次回受診日", selection: $endDate, displayedComponents: .date)
+                .environment(\.locale, Locale(identifier: "ja_JP"))
+                .labelsHidden()
+                .padding(.bottom, 60)
+            
+            // 計算結果を表示する領域
+            Text("次回受診日まで").font(.title2)
+            Text("\(calclateSpan(startDate: self.startDate, endDate: self.endDate))日分").font(.title).foregroundColor(.red)
+            Text("必要です").font(.title2)
+        } // VStack
     } // body
+    
     
     // 指定した日付の時間をリセットする関数
     func resetTime(date: Date) -> Date {
@@ -62,7 +54,8 @@ struct WeekCount: View {
         // 計算部分 TimeIntervalがDouble型のため差spanはDouble型で宣言
         let span:Double = resteTImeEndDate.timeIntervalSince(resetTimeStartDate)
         // TimeIntervalが秒数で与えられるため(60秒*60分*24時間)で除算して日数へ変換
-        let differenceInTheNumberOfDays = span/(60*60*24)
+        // 計算結果が1日分少ないため1を足している
+        let differenceInTheNumberOfDays = span/(60*60*24) + 1
         
         return Int(differenceInTheNumberOfDays)
     }
