@@ -69,8 +69,17 @@ struct SheetCount: View {
                 UIApplication.shared.endEditing()
             }) {
                 Text("計算")
+                    // buttonのデザインの部分
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.white)
+                    .frame(width: 200, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .padding()
+                    .background(Color.red)
+                    .cornerRadius(10)
             } //Button
-            .padding()
+            // Buttonの要素自体のサイズ感を余白込みで指定する
+            .frame(width: 300, height: 130, alignment: .center)
+            
             // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
             Text("\(self.total)シート(つづり)\n+\(String(format: "%.2f", self.fraction))錠(包)\n必要です")
         } // VStack
