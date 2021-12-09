@@ -30,27 +30,40 @@ struct SheetCount: View {
         VStack {
             HStack {
                 Text("1日必要錠(包)数")
+                // 両端寄せにするためにスペースを挿入
+                Spacer()
                 TextField("錠(包)", text: self.$dairyDose)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.decimalPad) // TextField
-            } // Hstack 1日必要錠(包)数
+                    .keyboardType(.decimalPad)
+                    .frame(width: 120, height: 30, alignment: .trailing)
+                // TextField
+            } // HStack 1日必要錠(包)数
             .padding()
             
             HStack {
-                Text("日数")
+                Text("処方日数")
+                // 両端寄せにするためにスペースを挿入
+                Spacer()
                 TextField("日", text: self.$numberOfDay)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad) // TextField
-            } // Hstack 日数
+                    .keyboardType(.numberPad)
+                    .frame(width: 120, height: 30, alignment: .trailing)
+                // TextField
+            } // HStack 処方日数
             .padding()
             
             HStack {
                 Text("1シート(つづり)あたりの\n錠(包)数")
+                // 両端寄せにするためにスペースを挿入
+                Spacer()
                 TextField("錠(包)", text: self.$numberPerSheet)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad) // TextField
-            } // Hstack
+                    .keyboardType(.numberPad)
+                    .frame(width: 120, height: 30, alignment: .trailing)
+                // TextField
+            } // HStack シートあたりの錠数
             .padding()
+
             
             Button(action: {
                 // キャストしてOptional型にしておかないとif let文で、nilチェックできないため、ここで値をDouble型にキャストしておく
@@ -61,7 +74,6 @@ struct SheetCount: View {
                 if let dairyDose = dairyDoseDouble, let numberOfDay = numberOfDayDouble, let numberPerSheet = numberPerSheetDouble, numberPerSheet != 0 {
                     self.total = Int(dairyDose * numberOfDay / numberPerSheet)
                     self.fraction = (dairyDose * numberOfDay).truncatingRemainder(dividingBy: numberPerSheet)
-                    print(total)
                 } else {
                     showAlert = true
                 }
