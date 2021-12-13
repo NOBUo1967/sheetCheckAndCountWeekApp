@@ -1,5 +1,5 @@
 //
-//  WeekCount.swift
+//  DaysCount.swift
 //  sheetCheckAndCountWeekApp
 //
 //  Created by Shinichiro Hirasawa on 2021/10/18.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WeekCount: View {
+struct DaysCount: View {
     @State private var startDate = Date()
     @State private var endDate = Date()
     
@@ -61,8 +61,8 @@ struct WeekCount: View {
     }
 }
 
-struct WeekCount_Previews: PreviewProvider {
+struct DaysCount_Previews: PreviewProvider {
     static var previews: some View {
-        WeekCount()
+        DaysCount()
     }
 }

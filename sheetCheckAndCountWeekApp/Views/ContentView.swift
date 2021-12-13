@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            WeekCount()
+            DaysCount()
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("週数計算機")
