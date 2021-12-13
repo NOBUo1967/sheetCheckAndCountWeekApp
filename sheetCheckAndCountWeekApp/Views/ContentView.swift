@@ -13,13 +13,28 @@ struct ContentView: View {
             DaysCount()
                 .tabItem {
                     Image(systemName: "calendar")
-                    Text("週数計算機")
+                    Text("日数計算")
+                }
+            // タブを4つにする予定のためダミーで配置している
+            // [todo]ファイル名、Imageは要変更
+            SheetCount()
+                .tabItem {
+                    Image(systemName: "pills.fill")
+                    Text("何日後はいつ")
                 }
             SheetCount()
                 .tabItem {
                     Image(systemName: "pills.fill")
-                    Text("ヒート計算機")
+                    Text("ヒート数計算")
                 }
+            // タブを4つにする予定のためダミーで配置している
+            // [todo]ファイル名、Imageは要変更
+            SheetCount()
+                .tabItem {
+                    Image(systemName: "pills.fill")
+                    Text("残薬計算")
+                }
+
             
         } // TabView
         .accentColor(.red)
