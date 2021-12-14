@@ -43,6 +43,7 @@ struct DaysCount: View {
     
     
     // 指定した日付の時間をリセットする関数
+    // 0401 23:59と0402 0:00のようなケースでは計算がうまく行かないため実装
     func resetTime(date: Date) -> Date {
         let calendar: Calendar = Calendar(identifier: .gregorian)
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
@@ -56,6 +57,7 @@ struct DaysCount: View {
     
     // 日付の差を計算する関数
     func calclateSpan(startDate: Date, endDate: Date) -> Int {
+        // 入力値の時間をリセット
         let resetTimeStartDate = resetTime(date: startDate)
         let resteTImeEndDate = resetTime(date: endDate)
         
