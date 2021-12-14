@@ -12,25 +12,33 @@ struct DaysCount: View {
     @State private var endDate = Date()
     
     var body: some View {
-        VStack {
+        Form {
             // 日付を選択する領域
-            Text("服用開始日").font(.title2)
-            DatePicker("服用開始日", selection: $startDate, displayedComponents: .date)
-                .environment(\.locale, Locale(identifier: "ja_JP"))
-                .labelsHidden()
-                .padding(.bottom, 30)
-            
-            Text("次回受診日").font(.title2)
-            DatePicker("次回受診日", selection: $endDate, displayedComponents: .date)
-                .environment(\.locale, Locale(identifier: "ja_JP"))
-                .labelsHidden()
-                .padding(.bottom, 60)
+            Section {
+                //            Text("服用開始日").font(.title2)
+                DatePicker("開始日", selection: $startDate, displayedComponents: .date)
+                    .environment(\.locale, Locale(identifier: "ja_JP"))
+                DatePicker("終了日", selection: $endDate, displayedComponents: .date)
+                    .environment(\.locale, Locale(identifier: "ja_JP"))
+                // 開始日を含むか否かのトグルボタン
+                Text("開始日を含む")
+            }  // Section
             
             // 計算結果を表示する領域
-            Text("次回受診日まで").font(.title2)
-            Text("\(calclateSpan(startDate: self.startDate, endDate: self.endDate))日分").font(.title).foregroundColor(.red)
-            Text("必要です").font(.title2)
-        } // VStack
+            Section{
+                HStack {
+                    // 文字サイズが小さすぎるためtitle2を指定
+                    Text("日数")
+                        .font(.title2)
+                    // 両端揃えのためにSpacerを挿入
+                    Spacer()
+                    // 計算結果を目立たせるために日数部分は赤字にした
+                    Text("\(calclateSpan(startDate: self.startDate, endDate: self.endDate))日")
+                        .font(.title2)
+                        .foregroundColor(.red)
+                } // HStack
+            } // Section
+        } // Form
     } // body
     
     
