@@ -8,20 +8,24 @@
 import SwiftUI
 
 struct DaysCount: View {
-    @State private var startDate = Date()
-    @State private var endDate = Date()
+    /// 日数計算基準日
+    @State private var startDate:Date = Date()
+    ///　日数計算終了日
+    @State private var endDate:Date = Date()
     
     var body: some View {
         Form {
             // 日付を選択する領域
             Section {
-                //            Text("服用開始日").font(.title2)
                 DatePicker("開始日", selection: $startDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
+                
                 DatePicker("終了日", selection: $endDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
-                // 開始日を含むか否かのトグルボタン
+                
+                // 開始日を含むか否かのトグルボタンを配置する
                 Text("開始日を含む")
+                Spacer()
             }  // Section
             
             // 計算結果を表示する領域
@@ -70,6 +74,7 @@ struct DaysCount: View {
         return Int(differenceInTheNumberOfDays)
     }
 }
+
 
 struct DaysCount_Previews: PreviewProvider {
     static var previews: some View {
