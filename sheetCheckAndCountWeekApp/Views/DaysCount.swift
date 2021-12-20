@@ -12,6 +12,8 @@ struct DaysCount: View {
     @State private var startDate:Date = Date()
     ///　日数計算終了日
     @State private var endDate:Date = Date()
+    /// toggleのオンオフを管理するための変数
+    @State private var includestartDate = false
     
     var body: some View {
         Form {
@@ -23,9 +25,11 @@ struct DaysCount: View {
                 DatePicker("終了日", selection: $endDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
                 
-                // 開始日を含むか否かのトグルボタンを配置する
-                Text("開始日を含む")
-                Spacer()
+                // 開始日を含むか否かのtoggleボタン
+                Toggle(isOn: $includestartDate) {
+                    Text("開始日を含む")
+                }
+
             }  // Section
             
             // 計算結果を表示する領域
@@ -40,6 +44,7 @@ struct DaysCount: View {
                     Text("\(calclateSpan(startDate: self.startDate, endDate: self.endDate))日")
                         .font(.title2)
                         .foregroundColor(.red)
+                    
                 } // HStack
             } // Section
         } // Form
@@ -49,6 +54,7 @@ struct DaysCount: View {
     // 指定した日付の時間をリセットする関数
     // 0401 23:59と0402 0:00のようなケースでは計算がうまく行かないため実装
     func resetTime(date: Date) -> Date {
+        
         let calendar: Calendar = Calendar(identifier: .gregorian)
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         
@@ -67,9 +73,16 @@ struct DaysCount: View {
         
         // 計算部分 TimeIntervalがDouble型のため差spanはDouble型で宣言
         let span:Double = resteTImeEndDate.timeIntervalSince(resetTimeStartDate)
+        
         // TimeIntervalが秒数で与えられるため(60秒*60分*24時間)で除算して日数へ変換
-        // 計算結果が1日分少ないため1を足している
-        let differenceInTheNumberOfDays = span/(60*60*24) + 1
+        // 下記の開始日を含むか否かの判定で値が変更しうるためvarで宣言
+        var differenceInTheNumberOfDays = span/(60*60*24)
+        
+        // 開始日を含むか否かのtoggleがオンのときは計算結果に+1をする
+        if includestartDate == true {
+            
+            differenceInTheNumberOfDays += 1
+        }
         
         return Int(differenceInTheNumberOfDays)
     }
