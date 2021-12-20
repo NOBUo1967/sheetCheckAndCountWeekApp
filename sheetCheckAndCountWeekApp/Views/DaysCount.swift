@@ -45,8 +45,6 @@ struct DaysCount: View {
                         .font(.title2)
                         .foregroundColor(.red)
                     
-                    // TODO: トグルボタンの値が反映されているか確認するための文字列。動作確認できたら削除する
-                    Text(includestartDate ? "オンです" : "オフです")
                 } // HStack
             } // Section
         } // Form
@@ -56,6 +54,7 @@ struct DaysCount: View {
     // 指定した日付の時間をリセットする関数
     // 0401 23:59と0402 0:00のようなケースでは計算がうまく行かないため実装
     func resetTime(date: Date) -> Date {
+        
         let calendar: Calendar = Calendar(identifier: .gregorian)
         var components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         
@@ -74,9 +73,16 @@ struct DaysCount: View {
         
         // 計算部分 TimeIntervalがDouble型のため差spanはDouble型で宣言
         let span:Double = resteTImeEndDate.timeIntervalSince(resetTimeStartDate)
+        
         // TimeIntervalが秒数で与えられるため(60秒*60分*24時間)で除算して日数へ変換
-        // 計算結果が1日分少ないため1を足している
-        let differenceInTheNumberOfDays = span/(60*60*24) + 1
+        // 下記の開始日を含むか否かの判定で値が変更しうるためvarで宣言
+        var differenceInTheNumberOfDays = span/(60*60*24)
+        
+        // 開始日を含むか否かのtoggleがオンのときは計算結果に+1をする
+        if includestartDate == true {
+            
+            differenceInTheNumberOfDays += 1
+        }
         
         return Int(differenceInTheNumberOfDays)
     }
