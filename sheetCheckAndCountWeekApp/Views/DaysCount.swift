@@ -12,6 +12,8 @@ struct DaysCount: View {
     @State private var startDate:Date = Date()
     ///　日数計算終了日
     @State private var endDate:Date = Date()
+    /// toggleのオンオフを管理するための変数
+    @State private var includestartDate = false
     
     var body: some View {
         Form {
@@ -23,9 +25,11 @@ struct DaysCount: View {
                 DatePicker("終了日", selection: $endDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
                 
-                // 開始日を含むか否かのトグルボタンを配置する
-                Text("開始日を含む")
-                Spacer()
+                // 開始日を含むか否かのtoggleボタン
+                Toggle(isOn: $includestartDate) {
+                    Text("開始日を含む")
+                }
+
             }  // Section
             
             // 計算結果を表示する領域
@@ -40,6 +44,9 @@ struct DaysCount: View {
                     Text("\(calclateSpan(startDate: self.startDate, endDate: self.endDate))日")
                         .font(.title2)
                         .foregroundColor(.red)
+                    
+                    // TODO: トグルボタンの値が反映されているか確認するための文字列。動作確認できたら削除する
+                    Text(includestartDate ? "オンです" : "オフです")
                 } // HStack
             } // Section
         } // Form
