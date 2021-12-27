@@ -17,9 +17,9 @@ struct ContentView: View {
                 }
             // タブを4つにする予定のためダミーで配置している
             // [todo]ファイル名、Imageは要変更
-            SheetCount()
+            AfterDateCount()
                 .tabItem {
-                    Image(systemName: "pills.fill")
+                    Image(systemName: "calendar.badge.plus")
                     Text("何日後はいつ")
                 }
             SheetCount()
