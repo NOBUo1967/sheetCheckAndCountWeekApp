@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder),to: nil, from: nil,for: nil)
-    }
-}
-
 struct SheetCount: View {
     // 各入力値。TextFieldから値を受け取るためString型とする
     @State var dairyDose: String = ""
@@ -83,8 +77,6 @@ struct SheetCount: View {
                 } else {
                     showAlert = true
                 }
-                
-                UIApplication.shared.endEditing()
             }) {
                 Text("計算")
                     // buttonのデザインの部分
@@ -105,6 +97,11 @@ struct SheetCount: View {
                 + Text("錠(包)\n必要です"))
                 .font(.title2)
         } // VStack
+        // keyboard外をタップするとkeyboardを閉じる処理
+        .onTapGesture {
+            UIApplication.shared.closeKeyboard()
+        }
+        // 
         .alert(isPresented: $showAlert) {
             Alert(title: Text("正しい値を入力してください"), message: Text("入力できる値は数値のみです\n1シートあたりの錠数に０は入力できません"), dismissButton: .default(Text("OK")))
         }

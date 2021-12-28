@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message:基準日に加算するための数値を入力し、取得できるようにする
+// commit_message:keyboardを閉じるためのextensionの記載部位を変更
 
 import SwiftUI
 
@@ -38,6 +38,7 @@ struct AfterDateCount: View {
                 } // VStack
             } // Section
         } // Form
+        // keyboard外をタップするとkeyboardを閉じる処理
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
         }
