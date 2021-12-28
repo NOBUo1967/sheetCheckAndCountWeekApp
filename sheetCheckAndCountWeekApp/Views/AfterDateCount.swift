@@ -5,13 +5,15 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message:計算の基準日を入力し、取得できるようにした
+// commit_message:基準日に加算するための数値を入力し、取得できるようにする
 
 import SwiftUI
 
 struct AfterDateCount: View {
     /// 基準日
     @State private var startDate:Date = Date()
+    /// 基準日に加算する数値
+    @State private var numberOfDate:String = ""
     
     var body: some View {
         Form {
@@ -19,7 +21,10 @@ struct AfterDateCount: View {
             Section {
                 DatePicker("開始日", selection: $startDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
-                Text("何日後")
+                TextField("日後", text: self.$numberOfDate)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.decimalPad)
+                    .frame(width: 120, height: 30, alignment: .trailing)
                 Text("開始日を含む")
             } // Section
             
@@ -27,12 +32,15 @@ struct AfterDateCount: View {
             Section {
                 VStack {
                     Text("\(startDate)から")
-                    Text("x日後は")
+                    Text("\(numberOfDate)日後は")
                     Text("\(startDate)")
                     
                 } // VStack
             } // Section
         } // Form
+        .onTapGesture {
+            UIApplication.shared.closeKeyboard()
+        }
     } // body
 }
 
