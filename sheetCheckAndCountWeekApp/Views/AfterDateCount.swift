@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message:keyboardを閉じるためのextensionの記載部位を変更
+// commit_message:基準日に加算するための数値を入力するkeyboardが小数点入力可能になっていたため小数点が入力できないように修正
 
 import SwiftUI
 
@@ -23,7 +23,7 @@ struct AfterDateCount: View {
                     .environment(\.locale, Locale(identifier: "ja_JP"))
                 TextField("日後", text: self.$numberOfDate)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.decimalPad)
+                    .keyboardType(.numberPad)
                     .frame(width: 120, height: 30, alignment: .trailing)
                 Text("開始日を含む")
             } // Section
