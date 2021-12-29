@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message:基準日に加算するための数値を入力するkeyboardが小数点入力可能になっていたため小数点が入力できないように修正
+// commit_message:表示する日付をyyyy年mm月dd日にするためにformatを定義した
 
 import SwiftUI
 
@@ -14,6 +14,22 @@ struct AfterDateCount: View {
     @State private var startDate:Date = Date()
     /// 基準日に加算する数値
     @State private var numberOfDate:String = ""
+    
+    /// 日数表示のフォーマット
+    var dateFormat: DateFormatter {
+        let format = DateFormatter()
+        // 曜日表示はいらないためlongを指定
+        format.dateStyle = .long
+        // 時刻は表示しないためnoneを指定
+        format.timeStyle = .none
+        
+        format.locale = Locale(identifier: "ja_JP")
+        format.calendar = Calendar(identifier: .japanese)
+        // formatはyyyy年mm月dd日としたかったため下記のテンプレートを使用
+        format.dateFormat = DateFormatter.dateFormat(fromTemplate: "yMMMd", options: 0, locale: Locale(identifier: "ja_JP"))
+        return format
+    }
+    
     
     var body: some View {
         Form {
@@ -31,9 +47,9 @@ struct AfterDateCount: View {
             // 計算結果を表示するSection
             Section {
                 VStack {
-                    Text("\(startDate)から")
+                    Text("\(startDate, formatter: dateFormat)から")
                     Text("\(numberOfDate)日後は")
-                    Text("\(startDate)")
+                    Text("\(startDate,formatter: dateFormat)")
                     
                 } // VStack
             } // Section
