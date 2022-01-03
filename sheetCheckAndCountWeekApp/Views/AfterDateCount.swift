@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message: 基準日に入力した日数を追加した日数を取得できるようにした
+// commit_message: 開始日を含むか否かのトグルボタンの実装
 
 import SwiftUI
 
@@ -16,6 +16,9 @@ struct AfterDateCount: View {
     @State private var numberOfDate: String = ""
     /// 加算後の日付
     @State private var dateAfterAddition:Date = Date()
+    /// toggleのオンオフを管理するための変数
+    // toggleのフラグ変数の方がBinding型のためState変数として宣言
+    @State private var includestartDate = false
     /// アラート表示のための状態変数
     @State private var showAlert: Bool = false
     
@@ -46,15 +49,23 @@ struct AfterDateCount: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.numberPad)
                     .frame(width: 120, height: 30, alignment: .trailing)
-                // Toggle実装予定
-                Text("開始日を含む")
+                // 開始日を含むか否かのToggle
+                Toggle(isOn: $includestartDate) {
+                    Text("開始日を含む")
+                }
+                
+                // 日数計算のbutton
                 Button(action: {
                     //　日数計算のためのカレンダーを定義
                     let calender = Calendar(identifier:.gregorian)
                     // 入力された日数はStr型であり、if let文でnilチェックするためInt?型にキャストする
                     let addDate: Int? = Int(self.numberOfDate)
                     // 入力された日数のnilチェック。0は入力されうるためチェックしない
-                    if let addDate = addDate {
+                    if var addDate = addDate {
+                        // 開始日を含むか否かのtoggleがonのときは加算する日数を-1する
+                        if includestartDate == true {
+                            addDate -= 1
+                        }
                         // 計算部分
                         self.dateAfterAddition = calender.date(byAdding: .day, value: addDate, to: self.startDate)!
                     } else {
