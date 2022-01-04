@@ -5,6 +5,8 @@
 //  Created by Shinichiro Hirasawa on 2021/10/18.
 //
 
+// commit_message: ヒート数計算の計算ボタンにbuttonStyleを適応する
+
 import SwiftUI
 
 struct SheetCount: View {
@@ -79,16 +81,10 @@ struct SheetCount: View {
                 }
             }) {
                 Text("計算")
-                    // buttonのデザインの部分
-                    .fontWeight(.bold)
-                    .foregroundColor(Color.white)
                     .frame(width: 200, height: 30, alignment: .center)
-                    .padding()
-                    .background(Color.red)
-                    .cornerRadius(10)
             } //Button
-            // Buttonの要素自体のサイズ感を余白込みで指定する
-            .frame(width: 300, height: 130, alignment: .center)
+            .buttonStyle(PrimaryButtonStyle())
+            .padding()
             
             // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
             (Text("\(self.total)").foregroundColor(Color.red)
