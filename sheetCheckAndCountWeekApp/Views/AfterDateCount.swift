@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message: 何日後かを入力するTextField内の文字の右寄せをやめた
+// commit_message: comment修正
 
 import SwiftUI
 
@@ -44,7 +44,7 @@ struct AfterDateCount: View {
                 // 基準日を入力する部分
                 DatePicker("開始日", selection: self.$startDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
-                // 加算する日数の入力部分。ラベルを実装する予定
+                // 加算する日数の入力部分
                 HStack {
                     // TextFieldのラベルとしてTextを設置
                     Text("何日後")
@@ -54,6 +54,7 @@ struct AfterDateCount: View {
                     TextField("日後", text: self.$numberOfDate)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.numberPad)
+                        // DatePickerと同じ幅にするためにwidth:110とした
                         .frame(width: 110, height: 30)
                 } // HStack
                 // 開始日を含むか否かのToggle
@@ -93,9 +94,9 @@ struct AfterDateCount: View {
                     Text("\(numberOfDate)日後は")
                     Text("\(dateAfterAddition,formatter: dateFormat)")
                 } // VStack
+                // Sction内のVStackの要素がTextの幅と同値であったためmaxWidthをinfinityとし、その上でcenterで中央寄せにした
                 .frame(maxWidth:.infinity, alignment: .center)
                 .font(.title3)
-                
             } // Section
         } // Form
         // keyboard外をタップするとkeyboardを閉じる処理
