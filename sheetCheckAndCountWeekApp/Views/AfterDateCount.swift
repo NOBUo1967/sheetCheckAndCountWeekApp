@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message: buttonのUIを整える
+// commit_message: 
 
 import SwiftUI
 
@@ -85,15 +85,10 @@ struct AfterDateCount: View {
                         }
                     }) {
                         Text("計算")
-                            .fontWeight(.bold)
-                            .foregroundColor(Color.white)
-                            .frame(minWidth: 100, alignment: .center)
-                            .padding()
-                            .background(Color.red)
-                            .cornerRadius(10)
+                            .frame(minWidth: 90, alignment: .center)
                     } // Button
-                    // Form内のButtonが正常に動作しないためmodifierを追加した
-                    .buttonStyle(BorderlessButtonStyle())
+                    // Form内のButtonが正常に動作しないためbuttonStyleを削除する際は注意
+                    .buttonStyle(PrimaryButtonStyle())
                 }
             } // Section
             
