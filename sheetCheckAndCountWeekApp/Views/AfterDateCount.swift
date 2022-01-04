@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message: 開始日を含むか否かのトグルボタンの実装
+// commit_message: TextFieldにラベルを追加する
 
 import SwiftUI
 
@@ -45,10 +45,18 @@ struct AfterDateCount: View {
                 DatePicker("開始日", selection: self.$startDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
                 // 加算する日数の入力部分。ラベルを実装する予定
-                TextField("日後", text: self.$numberOfDate)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                    .frame(width: 120, height: 30, alignment: .trailing)
+                HStack {
+                    // TextFieldのラベルとしてTextを設置
+                    Text("何日後")
+                    // 両端揃えにするためにSpacerを設置
+                    Spacer()
+                    // 日数入力部分
+                    TextField("日後", text: self.$numberOfDate)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.numberPad)
+                        .frame(width: 110, height: 30)
+                        .multilineTextAlignment(.trailing)
+                } // HStack
                 // 開始日を含むか否かのToggle
                 Toggle(isOn: $includestartDate) {
                     Text("開始日を含む")
