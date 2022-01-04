@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message: 計算結果を表示するTextのUIを整える
+// commit_message: 何日後かを入力するTextField内の文字の右寄せをやめた
 
 import SwiftUI
 
@@ -55,7 +55,6 @@ struct AfterDateCount: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.numberPad)
                         .frame(width: 110, height: 30)
-                        .multilineTextAlignment(.trailing)
                 } // HStack
                 // 開始日を含むか否かのToggle
                 Toggle(isOn: $includestartDate) {
