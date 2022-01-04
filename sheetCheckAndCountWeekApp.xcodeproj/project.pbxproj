@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54D332B8277A6D4100960330 /* AfterDateCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D332B7277A6D4100960330 /* AfterDateCount.swift */; };
+		54D332BB277BB9EF00960330 /* UIApplication+closeKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D332BA277BB9EF00960330 /* UIApplication+closeKeyboard.swift */; };
 		54DCA4BE271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DCA4BD271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift */; };
 		54DCA4C0271D68980083F5AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DCA4BF271D68980083F5AD /* ContentView.swift */; };
 		54DCA4C2271D689B0083F5AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54DCA4C1271D689B0083F5AD /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		54D332B7277A6D4100960330 /* AfterDateCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterDateCount.swift; sourceTree = "<group>"; };
+		54D332BA277BB9EF00960330 /* UIApplication+closeKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+closeKeyboard.swift"; sourceTree = "<group>"; };
 		54DCA4BA271D68980083F5AD /* sheetCheckAndCountWeekApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sheetCheckAndCountWeekApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54DCA4BD271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sheetCheckAndCountWeekAppApp.swift; sourceTree = "<group>"; };
 		54DCA4BF271D68980083F5AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -37,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54D332BC277BBE0F00960330 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				54D332BA277BB9EF00960330 /* UIApplication+closeKeyboard.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
 		54DCA4B1271D68980083F5AD = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +71,7 @@
 				54DCA4BD271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift */,
 				54DCA4C1271D689B0083F5AD /* Assets.xcassets */,
 				54DCA4C6271D689B0083F5AD /* Info.plist */,
+				54D332BC277BBE0F00960330 /* extension */,
 				54DCA4CC271D6AD60083F5AD /* Views */,
 				54DCA4C3271D689B0083F5AD /* Preview Content */,
 			);
@@ -77,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				54DCA4BF271D68980083F5AD /* ContentView.swift */,
+				54D332B7277A6D4100960330 /* AfterDateCount.swift */,
 				54DCA4CF271D6C0B0083F5AD /* DaysCount.swift */,
 				54DCA4D1271D70940083F5AD /* SheetCount.swift */,
 			);
@@ -154,6 +168,8 @@
 			files = (
 				54DCA4C0271D68980083F5AD /* ContentView.swift in Sources */,
 				54DCA4D2271D70940083F5AD /* SheetCount.swift in Sources */,
+				54D332B8277A6D4100960330 /* AfterDateCount.swift in Sources */,
+				54D332BB277BB9EF00960330 /* UIApplication+closeKeyboard.swift in Sources */,
 				54DCA4BE271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift in Sources */,
 				54DCA4D0271D6C0B0083F5AD /* DaysCount.swift in Sources */,
 			);
