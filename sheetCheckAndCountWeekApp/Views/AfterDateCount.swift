@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message: TextFieldにラベルを追加する
+// commit_message: 計算結果を表示するTextのUIを整える
 
 import SwiftUI
 
@@ -93,8 +93,10 @@ struct AfterDateCount: View {
                     Text("\(startDate, formatter: dateFormat)から")
                     Text("\(numberOfDate)日後は")
                     Text("\(dateAfterAddition,formatter: dateFormat)")
-                    
                 } // VStack
+                .frame(maxWidth:.infinity, alignment: .center)
+                .font(.title3)
+                
             } // Section
         } // Form
         // keyboard外をタップするとkeyboardを閉じる処理
