@@ -41,12 +41,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		54D332BC277BBE0F00960330 /* extension */ = {
+		548344642784EFA500EA62A1 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		54D332BC277BBE0F00960330 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				54D332BA277BB9EF00960330 /* UIApplication+closeKeyboard.swift */,
 			);
-			path = extension;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		54DCA4B1271D68980083F5AD = {
@@ -71,7 +78,8 @@
 				54DCA4BD271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift */,
 				54DCA4C1271D689B0083F5AD /* Assets.xcassets */,
 				54DCA4C6271D689B0083F5AD /* Info.plist */,
-				54D332BC277BBE0F00960330 /* extension */,
+				54D332BC277BBE0F00960330 /* Extensions */,
+				548344642784EFA500EA62A1 /* Styles */,
 				54DCA4CC271D6AD60083F5AD /* Views */,
 				54DCA4C3271D689B0083F5AD /* Preview Content */,
 			);
