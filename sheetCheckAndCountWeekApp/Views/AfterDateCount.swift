@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/12/28.
 //
 
-// commit_message: comment修正
+// commit_message: buttonのUIを整える
 
 import SwiftUI
 
@@ -63,28 +63,38 @@ struct AfterDateCount: View {
                 }
                 
                 // 日数計算のbutton
-                Button(action: {
-                    //　日数計算のためのカレンダーを定義
-                    let calender = Calendar(identifier:.gregorian)
-                    // 入力された日数はStr型であり、if let文でnilチェックするためInt?型にキャストする
-                    let addDate: Int? = Int(self.numberOfDate)
-                    // 入力された日数のnilチェック。0は入力されうるためチェックしない
-                    if var addDate = addDate {
-                        // 開始日を含むか否かのtoggleがonのときは加算する日数を-1する
-                        if includestartDate == true {
-                            addDate -= 1
+                HStack {
+                    // Buttonを右端に寄せるためにSpacerを追加
+                    Spacer()
+                    Button(action: {
+                        //　日数計算のためのカレンダーを定義
+                        let calender = Calendar(identifier:.gregorian)
+                        // 入力された日数はStr型であり、if let文でnilチェックするためInt?型にキャストする
+                        let addDate: Int? = Int(self.numberOfDate)
+                        // 入力された日数のnilチェック。0は入力されうるためチェックしない
+                        if var addDate = addDate {
+                            // 開始日を含むか否かのtoggleがonのときは加算する日数を-1する
+                            if includestartDate == true {
+                                addDate -= 1
+                            }
+                            // 計算部分
+                            self.dateAfterAddition = calender.date(byAdding: .day, value: addDate, to: self.startDate)!
+                        } else {
+                            // nilの場合はアラートを表示する
+                            showAlert = true
                         }
-                        // 計算部分
-                        self.dateAfterAddition = calender.date(byAdding: .day, value: addDate, to: self.startDate)!
-                    } else {
-                        // nilの場合はアラートを表示する
-                        showAlert = true
-                    }
-                }) {
-                    Text("計算")
-                } // Button
-                // Form内のButtonが正常に動作しないためmodifierを追加した
-                .buttonStyle(BorderlessButtonStyle())
+                    }) {
+                        Text("計算")
+                            .fontWeight(.bold)
+                            .foregroundColor(Color.white)
+                            .frame(minWidth: 100, alignment: .center)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(10)
+                    } // Button
+                    // Form内のButtonが正常に動作しないためmodifierを追加した
+                    .buttonStyle(BorderlessButtonStyle())
+                }
             } // Section
             
             // 計算結果を表示するSection
