@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: WIP_init
+// commit_message: tabViewから残薬計算画面に遷移できるようにした
 
 import SwiftUI
 
