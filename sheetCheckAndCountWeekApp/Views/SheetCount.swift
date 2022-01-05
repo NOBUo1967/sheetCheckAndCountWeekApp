@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/10/18.
 //
 
-// commit_message: ヒート数計算の計算ボタンにbuttonStyleを適応する
+// commit_message: WIP_init
 
 import SwiftUI
 
