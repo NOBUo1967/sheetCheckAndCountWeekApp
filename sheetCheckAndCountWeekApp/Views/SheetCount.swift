@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/10/18.
 //
 
-// commit_message: 数値入力部分のUIを整えた
+// commit_message: 計算結果表示部分のUIを整えた
 
 import SwiftUI
 
@@ -84,12 +84,18 @@ struct SheetCount: View {
             
             // 計算結果表示部分
             Section {
-                // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
-                (Text("\(self.total)").foregroundColor(Color.red)
-                    + Text("シート(つづり)\n+")
-                    + Text("\(String(format: "%.2f", self.fraction))").foregroundColor(Color.red)
-                    + Text("錠(包)\n必要です"))
-                    .font(.title2)
+                VStack {
+                    // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
+                    (Text("\(self.total)").foregroundColor(Color.red)
+                        + Text("シート(つづり)"))
+                    (Text("+")
+                        + Text("\(String(format: "%.2f", self.fraction))").foregroundColor(Color.red)
+                        + Text("錠(包)"))
+                    Text("必要です")
+                }// VStack
+                // Sction内のVStackの要素がTextの幅と同値であったためmaxWidthをinfinityとし、その上でcenterで中央寄せにした
+                .frame(maxWidth:.infinity, alignment: .center)
+                .font(.title2)
             } // Section
         } // Form
         // keyboard外をタップするとkeyboardを閉じる処理
