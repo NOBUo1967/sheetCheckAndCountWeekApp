@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/10/18.
 //
 
-// commit_message: 計算結果表示部分のUIを整えた
+// commit_message: 統一のButtonStyleにframeの要素を追加した
 
 import SwiftUI
 
@@ -76,7 +76,6 @@ struct SheetCount: View {
                         }
                     }) {
                         Text("計算")
-                            .frame(width: 90, alignment: .center)
                     } //Button
                     .buttonStyle(PrimaryButtonStyle())
                 } // HStack

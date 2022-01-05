@@ -12,6 +12,7 @@ import SwiftUI
 struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .frame(width: 90, alignment: .center)
             .padding()
             .background(Color.red)
             .foregroundColor(Color.white)
