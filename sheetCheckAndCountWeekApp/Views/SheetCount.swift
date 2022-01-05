@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/10/18.
 //
 
-// commit_message: VStackをFormに変更
+// commit_message: 数値入力部分のUIを整えた
 
 import SwiftUI
 
@@ -24,75 +24,73 @@ struct SheetCount: View {
     
     var body: some View {
         Form {
-            HStack {
-                Text("1日必要錠(包)数")
-                    .font(.title3)
-                // 両端寄せにするためにスペースを挿入
-                Spacer()
-                TextField("錠(包)", text: self.$dairyDose)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.decimalPad)
-                    .frame(width: 120, height: 30, alignment: .trailing)
-                // TextField
-            } // HStack 1日必要錠(包)数
-            .padding()
-            
-            HStack {
-                Text("処方日数")
-                    .font(.title3)
-                // 両端寄せにするためにスペースを挿入
-                Spacer()
-                TextField("日", text: self.$numberOfDay)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                    .frame(width: 120, height: 30, alignment: .trailing)
-                // TextField
-            } // HStack 処方日数
-            .padding()
-            
-            HStack {
-                Text("1シート(つづり)あたりの\n錠(包)数")
-                    .font(.title3)
-                // 両端寄せにするためにスペースを挿入
-                Spacer()
-                TextField("錠(包)", text: self.$numberPerSheet)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                    .frame(width: 120, height: 30, alignment: .trailing)
-                // TextField
-            } // HStack シートあたりの錠数
-            .padding()
-            
-            
-            Button(action: {
-                // キャストしてOptional型にしておかないとif let文で、nilチェックできないため、ここで値をDouble型にキャストしておく
-                let dairyDoseDouble:Double? = Double(dairyDose)
-                let numberOfDayDouble:Double? = Double(numberOfDay)
-                let numberPerSheetDouble: Double? = Double(numberPerSheet)
-                // 各値のnilチェックと空文字チェック
-                // 「 8」などスペース始まりの文字は弾いていないが、キーボードをNamPadに指定しているため問題ないと考える。
-                if let dairyDose = dairyDoseDouble, let numberOfDay = numberOfDayDouble, let numberPerSheet = numberPerSheetDouble, numberPerSheet != 0 {
-                    // 必要ヒート数を計算
-                    self.total = Int(dairyDose * numberOfDay / numberPerSheet)
-                    // 端数の錠数を計算。小数点第3位で四捨五入する
-                    self.fraction = round((dairyDose * numberOfDay).truncatingRemainder(dividingBy: numberPerSheet)*100) / 100
-                } else {
-                    showAlert = true
-                }
-            }) {
-                Text("計算")
-                    .frame(width: 200, height: 30, alignment: .center)
-            } //Button
-            .buttonStyle(PrimaryButtonStyle())
-            .padding()
+            Section {
+                HStack {
+                    Text("1日必要錠(包)数")
+                    // 両端寄せにするためにスペースを挿入
+                    Spacer()
+                    TextField("錠(包)", text: self.$dairyDose)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.decimalPad)
+                        .frame(width: 110, height: 30)
+                } // HStack
+                
+                HStack {
+                    Text("処方日数")
+                    // 両端寄せにするためにスペースを挿入
+                    Spacer()
+                    TextField("日", text: self.$numberOfDay)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.numberPad)
+                        .frame(width: 110, height: 30)
+                } // HStack
+                
+                HStack {
+                    Text("1シート(つづり)\nあたりの錠(包)数")
+                    // 両端寄せにするためにスペースを挿入
+                    Spacer()
+                    TextField("錠(包)", text: self.$numberPerSheet)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.numberPad)
+                        .frame(width: 110, height: 30)
+                } // HStack
+                
+                // 計算ボタン
+                HStack {
+                    // Buttonを右端寄せにするためにSpacerを設置した
+                    Spacer()
+                    Button(action: {
+                        // キャストしてOptional型にしておかないとif let文で、nilチェックできないため、ここで値をDouble型にキャストしておく
+                        let dairyDoseDouble:Double? = Double(dairyDose)
+                        let numberOfDayDouble:Double? = Double(numberOfDay)
+                        let numberPerSheetDouble: Double? = Double(numberPerSheet)
+                        // 各値のnilチェックと空文字チェック
+                        // 「 8」などスペース始まりの文字は弾いていないが、キーボードをNamPadに指定しているため問題ないと考える。
+                        if let dairyDose = dairyDoseDouble, let numberOfDay = numberOfDayDouble, let numberPerSheet = numberPerSheetDouble, numberPerSheet != 0 {
+                            // 必要ヒート数を計算
+                            self.total = Int(dairyDose * numberOfDay / numberPerSheet)
+                            // 端数の錠数を計算。小数点第3位で四捨五入する
+                            self.fraction = round((dairyDose * numberOfDay).truncatingRemainder(dividingBy: numberPerSheet)*100) / 100
+                        } else {
+                            showAlert = true
+                        }
+                    }) {
+                        Text("計算")
+                            .frame(width: 90, alignment: .center)
+                    } //Button
+                    .buttonStyle(PrimaryButtonStyle())
+                } // HStack
+            } // Section
             
             // 計算結果表示部分
-            // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
-            (Text("\(self.total)").foregroundColor(Color.red)
-                + Text("シート(つづり)\n+")
-                + Text("\(String(format: "%.2f", self.fraction))").foregroundColor(Color.red)
-                + Text("錠(包)\n必要です"))
-                .font(.title2)
+            Section {
+                // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
+                (Text("\(self.total)").foregroundColor(Color.red)
+                    + Text("シート(つづり)\n+")
+                    + Text("\(String(format: "%.2f", self.fraction))").foregroundColor(Color.red)
+                    + Text("錠(包)\n必要です"))
+                    .font(.title2)
+            } // Section
         } // Form
         // keyboard外をタップするとkeyboardを閉じる処理
         .onTapGesture {
@@ -102,7 +100,7 @@ struct SheetCount: View {
         .alert(isPresented: $showAlert) {
             Alert(title: Text("正しい値を入力してください"), message: Text("入力できる値は数値のみです\n1シートあたりの錠数に０は入力できません"), dismissButton: .default(Text("OK")))
         }
-    }
+    } // body
 }
 
 
