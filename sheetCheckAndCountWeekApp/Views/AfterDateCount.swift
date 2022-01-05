@@ -85,7 +85,6 @@ struct AfterDateCount: View {
                         }
                     }) {
                         Text("計算")
-                            .frame(minWidth: 90, alignment: .center)
                     } // Button
                     // Form内のButtonが正常に動作しないためbuttonStyleを削除する際は注意
                     .buttonStyle(PrimaryButtonStyle())
