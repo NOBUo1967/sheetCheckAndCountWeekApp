@@ -1,4 +1,4 @@
-Closed #issue_num
+Closes #issue_num
 
 ## チケットへのリンク
 
