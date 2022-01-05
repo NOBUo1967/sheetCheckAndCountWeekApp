@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2021/10/18.
 //
 
-// commit_message: WIP_init
+// commit_message: VStackをFormに変更
 
 import SwiftUI
 
@@ -23,7 +23,7 @@ struct SheetCount: View {
     @State var showAlert:Bool = false
     
     var body: some View {
-        VStack {
+        Form {
             HStack {
                 Text("1日必要錠(包)数")
                     .font(.title3)
@@ -86,13 +86,14 @@ struct SheetCount: View {
             .buttonStyle(PrimaryButtonStyle())
             .padding()
             
+            // 計算結果表示部分
             // 端数は小数点第二位まで表示する。1回0.25錠までが現実的なところ。
             (Text("\(self.total)").foregroundColor(Color.red)
                 + Text("シート(つづり)\n+")
                 + Text("\(String(format: "%.2f", self.fraction))").foregroundColor(Color.red)
                 + Text("錠(包)\n必要です"))
                 .font(.title2)
-        } // VStack
+        } // Form
         // keyboard外をタップするとkeyboardを閉じる処理
         .onTapGesture {
             UIApplication.shared.closeKeyboard()
