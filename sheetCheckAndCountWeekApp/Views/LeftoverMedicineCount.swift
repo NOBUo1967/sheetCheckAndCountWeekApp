@@ -5,14 +5,22 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: tabViewから残薬計算画面に遷移できるようにした
+// commit_message: 
 
 import SwiftUI
 
 struct LeftoverMedicineCount: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+        Form {
+            Section {
+                Text("Hello")
+            } // Section
+            
+            Section {
+                Text("Hello")
+            } // Section
+        }// Form
+    } // body
 }
 
 struct LeftoverMedicineCount_Previews: PreviewProvider {
