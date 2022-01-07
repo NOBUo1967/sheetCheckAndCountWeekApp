@@ -25,13 +25,17 @@ struct ContentView: View {
                     Image(systemName: "pills.fill")
                     Text("ヒート数計算")
                 }
-            // [todo]ファイル名、Imageは要変更
+            
             LeftoverMedicineCount()
                 .tabItem {
-                    Image(systemName: "pills.fill")
+                    if #available(iOS 15.0, *) {
+                        Image(systemName: "pills.circle")
+                    } else {
+                        Image(systemName: "pills")
+                    }
                     Text("残薬計算")
                 }
-
+            
             
         } // TabView
         .accentColor(.red)
