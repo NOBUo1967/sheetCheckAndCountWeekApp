@@ -5,13 +5,15 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: コメント、ラベル修正
+// commit_message: 処方日数を入力して表示できるようにした
 
 import SwiftUI
 
 struct LeftoverMedicineCount: View {
     /// 内服開始日
     @State private var startDate: Date = Date()
+    /// 処方日数。TextFieldから入力値を受け取るためString型にする
+    @State private var prescriptionDays: String = ""
     
     /// 日数表示のフォーマット
     var dateFormat: DateFormatter {
@@ -34,10 +36,24 @@ struct LeftoverMedicineCount: View {
                 // 処方日の入力
                 DatePicker("内服開始日", selection: self.$startDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
+                // 処方日数入力部分
+                HStack {
+                    // TextFieldのラベルとしてTextを設置
+                    Text("処方日数")
+                    // 両端揃えにするためにSpacerを設置
+                    Spacer()
+                    // 日数入力部分
+                    TextField("日分", text: self.$prescriptionDays)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(.numberPad)
+                        // DatePickerと同じ幅にするためにwidth:110とした
+                        .frame(width: 110, height: 30)
+                } // HStack
             } // Section
             
             Section {
                 Text("\(startDate, formatter: dateFormat)")
+                Text("\(prescriptionDays)日分")
             } // Section
         }// Form
     } // body
