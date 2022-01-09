@@ -5,12 +5,12 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message:処方日を入力できる
+// commit_message: コメント、ラベル修正
 
 import SwiftUI
 
 struct LeftoverMedicineCount: View {
-    /// 基準日
+    /// 内服開始日
     @State private var startDate: Date = Date()
     
     /// 日数表示のフォーマット
@@ -32,7 +32,7 @@ struct LeftoverMedicineCount: View {
         Form {
             Section {
                 // 処方日の入力
-                DatePicker("処方日", selection: self.$startDate, displayedComponents: .date)
+                DatePicker("内服開始日", selection: self.$startDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
             } // Section
             
