@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 処方日数と開始日と中断日の差を計算し、表示できるようにした
+// commit_message: 処方日数に入力されていない場合はアラートを表示する
 
 import SwiftUI
 
@@ -20,6 +20,8 @@ struct LeftoverMedicineCount: View {
     @State private var includestartDate = false
     /// 残薬の日数
     @State private var numberOfDaysLeftoverMedicines: Int = 0
+    /// アラート表示のための状態変数
+    @State private var showAlert: Bool = false
     
     /// 日数表示のフォーマット
     var dateFormat: DateFormatter {
@@ -81,7 +83,7 @@ struct LeftoverMedicineCount: View {
                             numberOfDaysLeftoverMedicines = prescriptionDays - dateSpan
                         } else {
                             // 処方日数に値が入力されていない場合はアラートを表示する
-                            print("test")
+                            showAlert = true
                         }
                     }) {
                         Text("計算")
@@ -98,6 +100,10 @@ struct LeftoverMedicineCount: View {
                 Text("\(numberOfDaysLeftoverMedicines)日分")
             } // Section
         }// Form
+        // Alert部分
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("正しい値を入力してください"), message: Text("処方日数には0以上の数字を入力してください"), dismissButton: .default(Text("OK")))
+        }
     } // body
 }
 
