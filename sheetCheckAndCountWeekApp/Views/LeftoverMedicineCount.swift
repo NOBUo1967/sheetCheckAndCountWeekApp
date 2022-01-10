@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: keyboard外をタップするとkeyboardを閉じるようにする
+// commit_message: 計算結果を表示する
 
 import SwiftUI
 
@@ -93,11 +93,11 @@ struct LeftoverMedicineCount: View {
             } // Section
             
             Section {
-                Text("\(startDate, formatter: dateFormat)")
-                Text("\(prescriptionDays)日分")
-                Text("\(interruptionDate, formatter: dateFormat)")
-                Text("\(includestartDate ? "on" : "off")")
-                Text("\(numberOfDaysLeftoverMedicines)日分")
+                VStack {
+                    Text("\(startDate, formatter: dateFormat)から")
+                    Text("\(interruptionDate, formatter: dateFormat)まで内服している場合")
+                    Text(numberOfDaysLeftoverMedicines >= 0 ? "残薬は\(numberOfDaysLeftoverMedicines)日分あると考えられます" : "test")
+                } // VStack
             } // Section
         }// Form
         // keyboard外をタップするとkeyboardを閉じる処理
