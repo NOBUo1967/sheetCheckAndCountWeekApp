@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 開始日を含むか否かのtoggleボタンを設置
+// commit_message: 開始日と中断日の日数の差を計算する
 
 import SwiftUI
 
@@ -18,6 +18,8 @@ struct LeftoverMedicineCount: View {
     @State private var interruptionDate: Date = Date()
     /// toggleのオンオフを管理するための変数
     @State private var includestartDate = false
+    /// 残薬の日数
+    @State private var numberOfDaysLeftoverMedicines: Int = 0
     
     /// 日数表示のフォーマット
     var dateFormat: DateFormatter {
@@ -69,7 +71,8 @@ struct LeftoverMedicineCount: View {
                     // Buttonを右端寄せにするためにSpacerを設置した
                     Spacer()
                     Button(action: {
-                        print("test")
+                        // 内服開始日と内服中断日の差を計算
+                        numberOfDaysLeftoverMedicines = DateCalculator().calclateSpan(startDate: self.startDate, endDate: self.interruptionDate, includestartDate: self.includestartDate)
                         // 処方日数に不正な値が入力される、もしくは開始日と中断日がマイナスになった際にアラートを表示する
                         //                    } else {
                         //                            print("test")
@@ -86,6 +89,7 @@ struct LeftoverMedicineCount: View {
                 Text("\(prescriptionDays)日分")
                 Text("\(interruptionDate, formatter: dateFormat)")
                 Text("\(includestartDate ? "on" : "off")")
+                Text("\(numberOfDaysLeftoverMedicines)日分")
             } // Section
         }// Form
     } // body
