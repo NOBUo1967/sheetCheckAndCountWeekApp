@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 開始日と中断日の日数の差を計算する
+// commit_message: 処方日数と開始日と中断日の差を計算し、表示できるようにした
 
 import SwiftUI
 
@@ -70,13 +70,19 @@ struct LeftoverMedicineCount: View {
                 HStack {
                     // Buttonを右端寄せにするためにSpacerを設置した
                     Spacer()
+                    // 残薬計算ボタン
                     Button(action: {
+                        // 入力された処方日数はString型のためキャスト。後にif let文でnilチェックするためInt?型にする
+                        let prescriptionDays: Int? = Int(self.prescriptionDays)
                         // 内服開始日と内服中断日の差を計算
-                        numberOfDaysLeftoverMedicines = DateCalculator().calclateSpan(startDate: self.startDate, endDate: self.interruptionDate, includestartDate: self.includestartDate)
-                        // 処方日数に不正な値が入力される、もしくは開始日と中断日がマイナスになった際にアラートを表示する
-                        //                    } else {
-                        //                            print("test")
-                        //                        }
+                        let dateSpan: Int = DateCalculator().calclateSpan(startDate: self.startDate, endDate: self.interruptionDate, includestartDate: self.includestartDate)
+                        // 処方日数のnilチェック。0は入力されうるためチェックしない
+                        if let prescriptionDays = prescriptionDays {
+                            numberOfDaysLeftoverMedicines = prescriptionDays - dateSpan
+                        } else {
+                            // 処方日数に値が入力されていない場合はアラートを表示する
+                            print("test")
+                        }
                     }) {
                         Text("計算")
                     } //Button
