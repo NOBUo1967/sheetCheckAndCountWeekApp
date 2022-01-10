@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 処方日数に入力されていない場合はアラートを表示する
+// commit_message: keyboard外をタップするとkeyboardを閉じるようにする
 
 import SwiftUI
 
@@ -100,6 +100,10 @@ struct LeftoverMedicineCount: View {
                 Text("\(numberOfDaysLeftoverMedicines)日分")
             } // Section
         }// Form
+        // keyboard外をタップするとkeyboardを閉じる処理
+        .onTapGesture {
+            UIApplication.shared.closeKeyboard()
+        }
         // Alert部分
         .alert(isPresented: $showAlert) {
             Alert(title: Text("正しい値を入力してください"), message: Text("処方日数には0以上の数字を入力してください"), dismissButton: .default(Text("OK")))
