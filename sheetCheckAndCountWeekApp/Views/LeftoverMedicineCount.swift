@@ -91,7 +91,8 @@ struct LeftoverMedicineCount: View {
             Section {
                 VStack {
                     Text("\(startDate, formatter: dateFormat)から")
-                    Text("\(interruptionDate, formatter: dateFormat)まで内服している場合")
+                    Text("\(interruptionDate, formatter: dateFormat)まで")
+                    Text("内服している場合")
                     Text(numberOfDaysLeftoverMedicines >= 0 ? "残薬は\(numberOfDaysLeftoverMedicines)日分あると考えられます" : "test")
                 } // VStack
                 // Sction内のVStackの要素がTextの幅と同値であったためmaxWidthをinfinityとし、その上でcenterで中央寄せにした
