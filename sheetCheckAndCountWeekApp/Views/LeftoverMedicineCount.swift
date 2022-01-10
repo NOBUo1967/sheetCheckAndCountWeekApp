@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 計算実行のためのbuttonを配置する
+// commit_message: 開始日を含むか否かのtoggleボタンを設置
 
 import SwiftUI
 
@@ -16,6 +16,8 @@ struct LeftoverMedicineCount: View {
     @State private var prescriptionDays: String = ""
     /// 中断日
     @State private var interruptionDate: Date = Date()
+    /// toggleのオンオフを管理するための変数
+    @State private var includestartDate = false
     
     /// 日数表示のフォーマット
     var dateFormat: DateFormatter {
@@ -38,6 +40,7 @@ struct LeftoverMedicineCount: View {
                 // 処方日の入力
                 DatePicker("内服開始日", selection: self.$startDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
+                
                 // 処方日数入力部分
                 HStack {
                     // TextFieldのラベルとしてTextを設置
@@ -48,22 +51,29 @@ struct LeftoverMedicineCount: View {
                     TextField("日分", text: self.$prescriptionDays)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.numberPad)
-                        // DatePickerと同じ幅にするためにwidth:110とした
+                    // DatePickerと同じ幅にするためにwidth:110とした
                         .frame(width: 110, height: 30)
                 } // HStack
+                
                 // 中断日の入力
                 DatePicker("中断日", selection: self.$interruptionDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
+                
+                // 開始日を含むか否かのtoggleボタン
+                Toggle(isOn: $includestartDate) {
+                    Text("開始日を含む")
+                }
+                
                 // 計算ボタン
                 HStack {
                     // Buttonを右端寄せにするためにSpacerを設置した
                     Spacer()
                     Button(action: {
                         print("test")
-                    // 処方日数に不正な値が入力される、もしくは開始日と中断日がマイナスになった際にアラートを表示する
-//                    } else {
-//                            print("test")
-//                        }
+                        // 処方日数に不正な値が入力される、もしくは開始日と中断日がマイナスになった際にアラートを表示する
+                        //                    } else {
+                        //                            print("test")
+                        //                        }
                     }) {
                         Text("計算")
                     } //Button
@@ -75,6 +85,7 @@ struct LeftoverMedicineCount: View {
                 Text("\(startDate, formatter: dateFormat)")
                 Text("\(prescriptionDays)日分")
                 Text("\(interruptionDate, formatter: dateFormat)")
+                Text("\(includestartDate ? "on" : "off")")
             } // Section
         }// Form
     } // body
