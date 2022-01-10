@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: UIの調整を行った
+// commit_message: 残薬がマイナスとなった場合は内服できていなかったかもしれない旨の文言を表示するようにしたが、文言の出しわけでなくalertにするかも
 
 import SwiftUI
 
@@ -93,7 +93,15 @@ struct LeftoverMedicineCount: View {
                     Text("\(startDate, formatter: dateFormat)から")
                     Text("\(interruptionDate, formatter: dateFormat)まで")
                     Text("内服している場合")
-                    Text(numberOfDaysLeftoverMedicines >= 0 ? "残薬は\(numberOfDaysLeftoverMedicines)日分あると考えられます" : "test")
+                    if numberOfDaysLeftoverMedicines >= 0 {
+                        (Text("残薬は")
+                         + Text("\(numberOfDaysLeftoverMedicines)日分").foregroundColor(Color.red)
+                         + Text("あると考えられます"))
+                    } else {
+                        Text("処方日数が足りていません")
+                        Text("何日間か内服できていなかった")
+                        Text("可能性があります")
+                    }
                 } // VStack
                 // Sction内のVStackの要素がTextの幅と同値であったためmaxWidthをinfinityとし、その上でcenterで中央寄せにした
                 .frame(maxWidth:.infinity, alignment: .center)
