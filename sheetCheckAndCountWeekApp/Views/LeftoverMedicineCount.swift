@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 内服開始日からの計算としているため開始日を含むか否かのtoggleボタンは不要のため削除した
+// commit_message: UIの調整を行った
 
 import SwiftUI
 
@@ -86,12 +86,17 @@ struct LeftoverMedicineCount: View {
                 } // HStack
             } // Section
             
+            
+            // 計算結果表示部分
             Section {
                 VStack {
                     Text("\(startDate, formatter: dateFormat)から")
                     Text("\(interruptionDate, formatter: dateFormat)まで内服している場合")
                     Text(numberOfDaysLeftoverMedicines >= 0 ? "残薬は\(numberOfDaysLeftoverMedicines)日分あると考えられます" : "test")
                 } // VStack
+                // Sction内のVStackの要素がTextの幅と同値であったためmaxWidthをinfinityとし、その上でcenterで中央寄せにした
+                .frame(maxWidth:.infinity, alignment: .center)
+                .font(.title3)
             } // Section
         }// Form
         // keyboard外をタップするとkeyboardを閉じる処理
