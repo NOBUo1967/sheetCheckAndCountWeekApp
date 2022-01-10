@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 計算結果を表示する
+// commit_message: 計算結果が合わないため修正
 
 import SwiftUI
 
@@ -80,7 +80,8 @@ struct LeftoverMedicineCount: View {
                         let dateSpan: Int = DateCalculator().calclateSpan(startDate: self.startDate, endDate: self.interruptionDate, includestartDate: self.includestartDate)
                         // 処方日数のnilチェック。0は入力されうるためチェックしない
                         if let prescriptionDays = prescriptionDays {
-                            numberOfDaysLeftoverMedicines = prescriptionDays - dateSpan
+                            // 内服開始日を含めるため残り日数は-1になる
+                            numberOfDaysLeftoverMedicines = prescriptionDays - dateSpan - 1
                         } else {
                             // 処方日数に値が入力されていない場合はアラートを表示する
                             showAlert = true
