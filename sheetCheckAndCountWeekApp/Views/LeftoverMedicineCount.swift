@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 計算結果が合わないため修正
+// commit_message: 内服開始日からの計算としているため開始日を含むか否かのtoggleボタンは不要のため削除した
 
 import SwiftUI
 
@@ -16,8 +16,6 @@ struct LeftoverMedicineCount: View {
     @State private var prescriptionDays: String = ""
     /// 中断日
     @State private var interruptionDate: Date = Date()
-    /// toggleのオンオフを管理するための変数
-    @State private var includestartDate = false
     /// 残薬の日数
     @State private var numberOfDaysLeftoverMedicines: Int = 0
     /// アラート表示のための状態変数
@@ -63,11 +61,6 @@ struct LeftoverMedicineCount: View {
                 DatePicker("中断日", selection: self.$interruptionDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
                 
-                // 開始日を含むか否かのtoggleボタン
-                Toggle(isOn: $includestartDate) {
-                    Text("開始日を含む")
-                }
-                
                 // 計算ボタン
                 HStack {
                     // Buttonを右端寄せにするためにSpacerを設置した
@@ -77,7 +70,7 @@ struct LeftoverMedicineCount: View {
                         // 入力された処方日数はString型のためキャスト。後にif let文でnilチェックするためInt?型にする
                         let prescriptionDays: Int? = Int(self.prescriptionDays)
                         // 内服開始日と内服中断日の差を計算
-                        let dateSpan: Int = DateCalculator().calclateSpan(startDate: self.startDate, endDate: self.interruptionDate, includestartDate: self.includestartDate)
+                        let dateSpan: Int = DateCalculator().calclateSpan(startDate: self.startDate, endDate: self.interruptionDate)
                         // 処方日数のnilチェック。0は入力されうるためチェックしない
                         if let prescriptionDays = prescriptionDays {
                             // 内服開始日を含めるため残り日数は-1になる

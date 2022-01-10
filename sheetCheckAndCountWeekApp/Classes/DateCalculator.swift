@@ -22,7 +22,8 @@ class DateCalculator {
     }
     
     // 日付の差を計算する関数
-    func calclateSpan(startDate: Date, endDate: Date, includestartDate: Bool) -> Int {
+    // 開始日を含むか否かは使用するファイルによって異なるためデフォルト値を設定しておく
+    func calclateSpan(startDate: Date, endDate: Date, includestartDate: Bool = false) -> Int {
         // 入力値の時間をリセット
         let resetTimeStartDate = resetTime(date: startDate)
         let resteTImeEndDate = resetTime(date: endDate)
