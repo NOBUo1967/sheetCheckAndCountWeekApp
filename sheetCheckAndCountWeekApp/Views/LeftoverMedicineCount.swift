@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 処方日数を入力して表示できるようにした
+// commit_message: 内服中断日を入力して表示できるようにした
 
 import SwiftUI
 
@@ -14,6 +14,8 @@ struct LeftoverMedicineCount: View {
     @State private var startDate: Date = Date()
     /// 処方日数。TextFieldから入力値を受け取るためString型にする
     @State private var prescriptionDays: String = ""
+    /// 中断日
+    @State private var interruptionDate: Date = Date()
     
     /// 日数表示のフォーマット
     var dateFormat: DateFormatter {
@@ -49,11 +51,15 @@ struct LeftoverMedicineCount: View {
                         // DatePickerと同じ幅にするためにwidth:110とした
                         .frame(width: 110, height: 30)
                 } // HStack
+                // 中断日の入力
+                DatePicker("中断日", selection: self.$interruptionDate, displayedComponents: .date)
+                    .environment(\.locale, Locale(identifier: "ja_JP"))
             } // Section
             
             Section {
                 Text("\(startDate, formatter: dateFormat)")
                 Text("\(prescriptionDays)日分")
+                Text("\(interruptionDate, formatter: dateFormat)")
             } // Section
         }// Form
     } // body
