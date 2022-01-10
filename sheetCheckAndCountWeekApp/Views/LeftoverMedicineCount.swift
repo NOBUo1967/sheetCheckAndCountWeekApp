@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 内服中断日を入力して表示できるようにした
+// commit_message: 計算実行のためのbuttonを配置する
 
 import SwiftUI
 
@@ -54,6 +54,21 @@ struct LeftoverMedicineCount: View {
                 // 中断日の入力
                 DatePicker("中断日", selection: self.$interruptionDate, displayedComponents: .date)
                     .environment(\.locale, Locale(identifier: "ja_JP"))
+                // 計算ボタン
+                HStack {
+                    // Buttonを右端寄せにするためにSpacerを設置した
+                    Spacer()
+                    Button(action: {
+                        print("test")
+                    // 処方日数に不正な値が入力される、もしくは開始日と中断日がマイナスになった際にアラートを表示する
+//                    } else {
+//                            print("test")
+//                        }
+                    }) {
+                        Text("計算")
+                    } //Button
+                    .buttonStyle(PrimaryButtonStyle())
+                } // HStack
             } // Section
             
             Section {
