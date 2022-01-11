@@ -5,9 +5,17 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 残薬がマイナスとなった場合は内服できていなかったかもしれない旨の文言を表示するようにしたが、文言の出しわけでなくalertにするかも
+// commit_message: 残薬がマイナスとなった場合は内服できていなかったかもしれない旨のalertを表示する
 
 import SwiftUI
+
+/// アラートを出し分けるための列挙体の定義
+enum AlertType {
+    // 入力値が誤っている場合のアラート
+    case incorrectInputValue
+    // 薬不足の場合のアラート
+    case runOutMedicine
+}
 
 struct LeftoverMedicineCount: View {
     /// 内服開始日
@@ -20,6 +28,8 @@ struct LeftoverMedicineCount: View {
     @State private var numberOfDaysLeftoverMedicines: Int = 0
     /// アラート表示のための状態変数
     @State private var showAlert: Bool = false
+    /// アラートの出し分けのための変数。初期値は入力値の誤りとしておく
+    @State private var alertType: AlertType = .incorrectInputValue
     
     /// 日数表示のフォーマット
     var dateFormat: DateFormatter {
@@ -75,8 +85,15 @@ struct LeftoverMedicineCount: View {
                         if let prescriptionDays = prescriptionDays {
                             // 内服開始日を含めるため残り日数は-1になる
                             numberOfDaysLeftoverMedicines = prescriptionDays - dateSpan - 1
+                            
+                            // 残薬数がマイナスになる場合は内服できていなかったかもしれない旨のアラートを表示する
+                            if numberOfDaysLeftoverMedicines < 0 {
+                                alertType = .runOutMedicine
+                                showAlert = true
+                            }
                         } else {
                             // 処方日数に値が入力されていない場合はアラートを表示する
+                            alertType = .incorrectInputValue
                             showAlert = true
                         }
                     }) {
@@ -93,15 +110,9 @@ struct LeftoverMedicineCount: View {
                     Text("\(startDate, formatter: dateFormat)から")
                     Text("\(interruptionDate, formatter: dateFormat)まで")
                     Text("内服している場合")
-                    if numberOfDaysLeftoverMedicines >= 0 {
-                        (Text("残薬は")
-                         + Text("\(numberOfDaysLeftoverMedicines)日分").foregroundColor(Color.red)
-                         + Text("あると考えられます"))
-                    } else {
-                        Text("処方日数が足りていません")
-                        Text("何日間か内服できていなかった")
-                        Text("可能性があります")
-                    }
+                    (Text("残薬は")
+                     + Text("\(numberOfDaysLeftoverMedicines)日分").foregroundColor(Color.red)
+                     + Text("あると考えられます"))
                 } // VStack
                 // Sction内のVStackの要素がTextの幅と同値であったためmaxWidthをinfinityとし、その上でcenterで中央寄せにした
                 .frame(maxWidth:.infinity, alignment: .center)
@@ -114,7 +125,15 @@ struct LeftoverMedicineCount: View {
         }
         // Alert部分
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("正しい値を入力してください"), message: Text("処方日数には0以上の数字を入力してください"), dismissButton: .default(Text("OK")))
+            switch alertType {
+            // 入力値が誤っている場合のケース
+            case .incorrectInputValue:
+                return Alert(title: Text("正しい値を入力してください"), message: Text("処方日数には0以上の数字を入力してください"), dismissButton: .default(Text("OK")))
+            // 残薬数がマイナスになる場合のケース
+            case .runOutMedicine:
+                return Alert(title: Text("処方日数が足りていません"), message: Text("何日間か内服できていなかった\n可能性があります"), dismissButton: .default(Text("OK")))
+            }
+            
         }
     } // body
 }
