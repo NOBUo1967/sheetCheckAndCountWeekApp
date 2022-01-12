@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		548344662784F14400EA62A1 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548344652784F14400EA62A1 /* ButtonStyle.swift */; };
+		5483446827864AAB00EA62A1 /* LeftoverMedicineCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5483446727864AAA00EA62A1 /* LeftoverMedicineCount.swift */; };
+		54875DFE278BBC4A00886B2F /* DateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54875DFD278BBC4A00886B2F /* DateCalculator.swift */; };
 		54D332B8277A6D4100960330 /* AfterDateCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D332B7277A6D4100960330 /* AfterDateCount.swift */; };
 		54D332BB277BB9EF00960330 /* UIApplication+closeKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D332BA277BB9EF00960330 /* UIApplication+closeKeyboard.swift */; };
 		54DCA4BE271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DCA4BD271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		548344652784F14400EA62A1 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
+		5483446727864AAA00EA62A1 /* LeftoverMedicineCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftoverMedicineCount.swift; sourceTree = "<group>"; };
+		54875DFD278BBC4A00886B2F /* DateCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculator.swift; sourceTree = "<group>"; };
 		54D332B7277A6D4100960330 /* AfterDateCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterDateCount.swift; sourceTree = "<group>"; };
 		54D332BA277BB9EF00960330 /* UIApplication+closeKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+closeKeyboard.swift"; sourceTree = "<group>"; };
 		54DCA4BA271D68980083F5AD /* sheetCheckAndCountWeekApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sheetCheckAndCountWeekApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +53,14 @@
 				548344652784F14400EA62A1 /* ButtonStyle.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		54875DFC278BBBD700886B2F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				54875DFD278BBC4A00886B2F /* DateCalculator.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		54D332BC277BBE0F00960330 /* Extensions */ = {
@@ -81,6 +93,7 @@
 				54DCA4BD271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift */,
 				54DCA4C1271D689B0083F5AD /* Assets.xcassets */,
 				54DCA4C6271D689B0083F5AD /* Info.plist */,
+				54875DFC278BBBD700886B2F /* Classes */,
 				54D332BC277BBE0F00960330 /* Extensions */,
 				548344642784EFA500EA62A1 /* Styles */,
 				54DCA4CC271D6AD60083F5AD /* Views */,
@@ -103,6 +116,7 @@
 				54DCA4BF271D68980083F5AD /* ContentView.swift */,
 				54D332B7277A6D4100960330 /* AfterDateCount.swift */,
 				54DCA4CF271D6C0B0083F5AD /* DaysCount.swift */,
+				5483446727864AAA00EA62A1 /* LeftoverMedicineCount.swift */,
 				54DCA4D1271D70940083F5AD /* SheetCount.swift */,
 			);
 			path = Views;
@@ -180,7 +194,9 @@
 				54DCA4C0271D68980083F5AD /* ContentView.swift in Sources */,
 				54DCA4D2271D70940083F5AD /* SheetCount.swift in Sources */,
 				548344662784F14400EA62A1 /* ButtonStyle.swift in Sources */,
+				54875DFE278BBC4A00886B2F /* DateCalculator.swift in Sources */,
 				54D332B8277A6D4100960330 /* AfterDateCount.swift in Sources */,
+				5483446827864AAB00EA62A1 /* LeftoverMedicineCount.swift in Sources */,
 				54D332BB277BB9EF00960330 /* UIApplication+closeKeyboard.swift in Sources */,
 				54DCA4BE271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift in Sources */,
 				54DCA4D0271D6C0B0083F5AD /* DaysCount.swift in Sources */,

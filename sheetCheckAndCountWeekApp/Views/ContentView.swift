@@ -25,14 +25,17 @@ struct ContentView: View {
                     Image(systemName: "pills.fill")
                     Text("ヒート数計算")
                 }
-            // タブを4つにする予定のためダミーで配置している
-            // [todo]ファイル名、Imageは要変更
-            SheetCount()
+            
+            LeftoverMedicineCount()
                 .tabItem {
-                    Image(systemName: "pills.fill")
+                    if #available(iOS 15.0, *) {
+                        Image(systemName: "pills.circle")
+                    } else {
+                        Image(systemName: "pills")
+                    }
                     Text("残薬計算")
                 }
-
+            
             
         } // TabView
         .accentColor(.red)
