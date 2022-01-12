@@ -5,7 +5,7 @@
 //  Created by Shinichiro Hirasawa on 2022/01/06.
 //
 
-// commit_message: 残薬がマイナスとなった場合は内服できていなかったかもしれない旨のalertを表示する
+// commit_message: 中断日が内服開始日より前の日付だった場合はアラートを表示する
 
 import SwiftUI
 
@@ -13,6 +13,8 @@ import SwiftUI
 enum AlertType {
     // 入力値が誤っている場合のアラート
     case incorrectInputValue
+    // 中断日が処方開始日より前の日付だった場合のアラート
+    case incorrectSelectedDate
     // 薬不足の場合のアラート
     case runOutMedicine
 }
@@ -80,11 +82,20 @@ struct LeftoverMedicineCount: View {
                         // 入力された処方日数はString型のためキャスト。後にif let文でnilチェックするためInt?型にする
                         let prescriptionDays: Int? = Int(self.prescriptionDays)
                         // 内服開始日と内服中断日の差を計算
-                        let dateSpan: Int = DateCalculator().calclateSpan(startDate: self.startDate, endDate: self.interruptionDate)
+                        // 内服開始日を計算に含むためincludestartDateはtrueとする
+                        let dateSpan: Int = DateCalculator().calclateSpan(startDate: self.startDate, endDate: self.interruptionDate, includestartDate: true)
+                        
+                        // 日数の差がマイナスになる場合はアラートを表示するして処理を抜ける
+                        if dateSpan < 0 {
+                            alertType = .incorrectSelectedDate
+                            showAlert = true
+                            return
+                        }
+                        
                         // 処方日数のnilチェック。0は入力されうるためチェックしない
                         if let prescriptionDays = prescriptionDays {
-                            // 内服開始日を含めるため残り日数は-1になる
-                            numberOfDaysLeftoverMedicines = prescriptionDays - dateSpan - 1
+                            // 残薬数の計算
+                            numberOfDaysLeftoverMedicines = prescriptionDays - dateSpan
                             
                             // 残薬数がマイナスになる場合は内服できていなかったかもしれない旨のアラートを表示する
                             if numberOfDaysLeftoverMedicines < 0 {
@@ -126,10 +137,13 @@ struct LeftoverMedicineCount: View {
         // Alert部分
         .alert(isPresented: $showAlert) {
             switch alertType {
-            // 入力値が誤っている場合のケース
+                // 入力値が誤っているケース
             case .incorrectInputValue:
                 return Alert(title: Text("正しい値を入力してください"), message: Text("処方日数には0以上の数字を入力してください"), dismissButton: .default(Text("OK")))
-            // 残薬数がマイナスになる場合のケース
+                // 中断日が内服開始日より前の日付になっているケース
+            case .incorrectSelectedDate:
+                return Alert(title: Text("正しい値を入力してください"), message: Text("中断日は内服開始日より後の日付を選択してください"), dismissButton: .default(Text("OK")))
+                // 残薬数がマイナスになるケース
             case .runOutMedicine:
                 return Alert(title: Text("処方日数が足りていません"), message: Text("何日間か内服できていなかった\n可能性があります"), dismissButton: .default(Text("OK")))
             }
