@@ -96,7 +96,7 @@ struct AfterDateCount: View {
                 VStack {
                     Text("\(startDate, formatter: dateFormat)から")
                     Text("\(numberOfDate)日後は")
-                    Text("\(dateAfterAddition,formatter: dateFormat)")
+                    Text("\(dateAfterAddition,formatter: dateFormat)です")
                 } // VStack
                 // Sction内のVStackの要素がTextの幅と同値であったためmaxWidthをinfinityとし、その上でcenterで中央寄せにした
                 .frame(maxWidth:.infinity, alignment: .center)
