@@ -74,7 +74,8 @@ struct AfterDateCount: View {
                         // 入力された日数のnilチェック。0は入力されうるためチェックしない
                         if var addDate = addDate {
                             // 開始日を含むか否かのtoggleがonのときは加算する日数を-1する
-                            if includestartDate == true {
+                            // 入力された日数が0のときに、加算する日数を-1にしてしまうと、結果として開始日の前日が表示されてしまうため0は弾く
+                            if includestartDate == true, addDate != 0 {
                                 addDate -= 1
                             }
                             // 計算部分
