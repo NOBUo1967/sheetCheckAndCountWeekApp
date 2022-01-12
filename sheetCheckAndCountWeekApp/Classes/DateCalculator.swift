@@ -35,10 +35,15 @@ class DateCalculator {
         // 下記の開始日を含むか否かの判定で値が変更しうるためvarで宣言
         var differenceInTheNumberOfDays = span/(60*60*24)
         
-        // 開始日を含むか否かのtoggleがオンのときは計算結果に+1をする
+        // 開始日を含む場合の処理
         if includestartDate == true {
-            
-            differenceInTheNumberOfDays += 1
+            // 終了日が開始日より以後のの日付の場合は日数の差に+1する
+            if resetTimeStartDate <= resteTImeEndDate {
+                differenceInTheNumberOfDays += 1
+            } else if resetTimeStartDate > resteTImeEndDate {
+                // 終了日が開始日より前の日付の場合は日数の差に-1する
+                differenceInTheNumberOfDays -= 1
+            }
         }
         
         return Int(differenceInTheNumberOfDays)
