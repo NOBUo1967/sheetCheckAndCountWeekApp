@@ -38,80 +38,90 @@ struct AfterDateCount: View {
     }
     
     var body: some View {
-        Form {
-            // 計算のための値を入力するSection
-            Section {
-                // 基準日を入力する部分
-                DatePicker("開始日", selection: self.$startDate, displayedComponents: .date)
-                    .environment(\.locale, Locale(identifier: "ja_JP"))
-                // 加算する日数の入力部分
-                HStack {
-                    // TextFieldのラベルとしてTextを設置
-                    Text("何日後")
-                    // 両端揃えにするためにSpacerを設置
-                    Spacer()
-                    // 日数入力部分
-                    TextField("日後", text: self.$numberOfDate)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.numberPad)
+        // 背景色を設定するためにZStackを設置
+        ZStack {
+            // 背景色の設定
+            Color.customBeige
+                .edgesIgnoringSafeArea(.all)
+            Form {
+                // 計算のための値を入力するSection
+                Section {
+                    // 基準日を入力する部分
+                    DatePicker("開始日", selection: self.$startDate, displayedComponents: .date)
+                        .environment(\.locale, Locale(identifier: "ja_JP"))
+                    // 加算する日数の入力部分
+                    HStack {
+                        // TextFieldのラベルとしてTextを設置
+                        Text("何日後")
+                        // 両端揃えにするためにSpacerを設置
+                        Spacer()
+                        // 日数入力部分
+                        TextField("日後", text: self.$numberOfDate)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.numberPad)
                         // DatePickerと同じ幅にするためにwidth:110とした
-                        .frame(width: 110, height: 30)
-                } // HStack
-                // 開始日を含むか否かのToggle
-                Toggle(isOn: $includestartDate) {
-                    Text("開始日を含む")
-                }
-                
-                // 日数計算のbutton
-                HStack {
-                    // Buttonを右端に寄せるためにSpacerを追加
-                    Spacer()
-                    Button(action: {
-                        //　日数計算のためのカレンダーを定義
-                        let calender = Calendar(identifier:.gregorian)
-                        // 入力された日数はStr型であり、if let文でnilチェックするためInt?型にキャストする
-                        let addDate: Int? = Int(self.numberOfDate)
-                        // 入力された日数のnilチェック。0は入力されうるためチェックしない
-                        if var addDate = addDate {
-                            // 開始日を含むか否かのtoggleがonのときは加算する日数を-1する
-                            // 入力された日数が0のときに、加算する日数を-1にしてしまうと、結果として開始日の前日が表示されてしまうため0は弾く
-                            if includestartDate == true, addDate != 0 {
-                                addDate -= 1
+                            .frame(width: 110, height: 30)
+                    } // HStack
+                    // 開始日を含むか否かのToggle
+                    Toggle(isOn: $includestartDate) {
+                        Text("開始日を含む")
+                    }
+                    
+                    // 日数計算のbutton
+                    HStack {
+                        // Buttonを右端に寄せるためにSpacerを追加
+                        Spacer()
+                        Button(action: {
+                            //　日数計算のためのカレンダーを定義
+                            let calender = Calendar(identifier:.gregorian)
+                            // 入力された日数はStr型であり、if let文でnilチェックするためInt?型にキャストする
+                            let addDate: Int? = Int(self.numberOfDate)
+                            // 入力された日数のnilチェック。0は入力されうるためチェックしない
+                            if var addDate = addDate {
+                                // 開始日を含むか否かのtoggleがonのときは加算する日数を-1する
+                                // 入力された日数が0のときに、加算する日数を-1にしてしまうと、結果として開始日の前日が表示されてしまうため0は弾く
+                                if includestartDate == true, addDate != 0 {
+                                    addDate -= 1
+                                }
+                                // 計算部分
+                                self.dateAfterAddition = calender.date(byAdding: .day, value: addDate, to: self.startDate)!
+                            } else {
+                                // nilの場合はアラートを表示する
+                                showAlert = true
                             }
-                            // 計算部分
-                            self.dateAfterAddition = calender.date(byAdding: .day, value: addDate, to: self.startDate)!
-                        } else {
-                            // nilの場合はアラートを表示する
-                            showAlert = true
-                        }
-                    }) {
-                        Text("計算")
-                    } // Button
-                    // Form内のButtonが正常に動作しないためbuttonStyleを削除する際は注意
-                    .buttonStyle(PrimaryButtonStyle())
-                }
-            } // Section
-            
-            // 計算結果を表示するSection
-            Section {
-                VStack {
-                    Text("\(startDate, formatter: dateFormat)から")
-                    Text("\(numberOfDate)日後は")
-                    Text("\(dateAfterAddition,formatter: dateFormat)です")
-                } // VStack
-                // Sction内のVStackの要素がTextの幅と同値であったためmaxWidthをinfinityとし、その上でcenterで中央寄せにした
-                .frame(maxWidth:.infinity, alignment: .center)
-                .font(.title3)
-            } // Section
-        } // Form
-        // keyboard外をタップするとkeyboardを閉じる処理
-        .onTapGesture {
-            UIApplication.shared.closeKeyboard()
-        }
-        // Alert部分
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("正しい値を入力してください"), message: Text("何日後には0以上の数字を入力してください"), dismissButton: .default(Text("OK")))
-        }
+                        }) {
+                            Text("計算")
+                        } // Button
+                        // Form内のButtonが正常に動作しないためbuttonStyleを削除する際は注意
+                        .buttonStyle(PrimaryButtonStyle())
+                    }
+                } // Section
+                
+                // 計算結果を表示するSection
+                Section {
+                    VStack {
+                        Text("\(startDate, formatter: dateFormat)から")
+                        Text("\(numberOfDate)日後は")
+                        Text("\(dateAfterAddition,formatter: dateFormat)です")
+                    } // VStack
+                    // Sction内のVStackの要素がTextの幅と同値であったためmaxWidthをinfinityとし、その上でcenterで中央寄せにした
+                    .frame(maxWidth:.infinity, alignment: .center)
+                    .font(.title3)
+                } // Section
+            } // Form
+            // 設定した背景色を有効にするためにFormのデフォルトの背景色を透明にした
+            .onAppear() {
+                UITableView.appearance().backgroundColor = .clear
+            }
+            // keyboard外をタップするとkeyboardを閉じる処理
+            .onTapGesture {
+                UIApplication.shared.closeKeyboard()
+            }
+            // Alert部分
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("正しい値を入力してください"), message: Text("何日後には0以上の数字を入力してください"), dismissButton: .default(Text("OK")))
+            }
+        } // ZStack
     } // body
 }
 

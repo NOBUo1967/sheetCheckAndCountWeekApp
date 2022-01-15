@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		54568A96279226FF001B8373 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54568A95279226FF001B8373 /* Color.swift */; };
 		548344662784F14400EA62A1 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548344652784F14400EA62A1 /* ButtonStyle.swift */; };
 		5483446827864AAB00EA62A1 /* LeftoverMedicineCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5483446727864AAA00EA62A1 /* LeftoverMedicineCount.swift */; };
 		54875DFE278BBC4A00886B2F /* DateCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54875DFD278BBC4A00886B2F /* DateCalculator.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		54568A95279226FF001B8373 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		548344652784F14400EA62A1 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		5483446727864AAA00EA62A1 /* LeftoverMedicineCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftoverMedicineCount.swift; sourceTree = "<group>"; };
 		54875DFD278BBC4A00886B2F /* DateCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculator.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				54D332BA277BB9EF00960330 /* UIApplication+closeKeyboard.swift */,
+				54568A95279226FF001B8373 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				54875DFE278BBC4A00886B2F /* DateCalculator.swift in Sources */,
 				54D332B8277A6D4100960330 /* AfterDateCount.swift in Sources */,
 				5483446827864AAB00EA62A1 /* LeftoverMedicineCount.swift in Sources */,
+				54568A96279226FF001B8373 /* Color.swift in Sources */,
 				54D332BB277BB9EF00960330 /* UIApplication+closeKeyboard.swift in Sources */,
 				54DCA4BE271D68980083F5AD /* sheetCheckAndCountWeekAppApp.swift in Sources */,
 				54DCA4D0271D6C0B0083F5AD /* DaysCount.swift in Sources */,
