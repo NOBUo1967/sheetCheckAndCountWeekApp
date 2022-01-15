@@ -10,4 +10,5 @@ import SwiftUI
 
 extension Color {
     static let customBeige = Color("customBeige")
+    static let tabIconBrown = Color("tabIconBrown")
 }

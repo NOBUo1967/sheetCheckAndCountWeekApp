@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // tabViewの色を設定
+    init() {
+        UITabBar.appearance().unselectedItemTintColor = UIColor(Color.tabIconBrown)
+    }
+    
     var body: some View {
         TabView {
             DaysCount()
