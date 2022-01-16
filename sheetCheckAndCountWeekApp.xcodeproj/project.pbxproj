@@ -19,9 +19,11 @@
 		54DCA4C5271D689B0083F5AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54DCA4C4271D689B0083F5AD /* Preview Assets.xcassets */; };
 		54DCA4D0271D6C0B0083F5AD /* DaysCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DCA4CF271D6C0B0083F5AD /* DaysCount.swift */; };
 		54DCA4D2271D70940083F5AD /* SheetCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DCA4D1271D70940083F5AD /* SheetCount.swift */; };
+		87C72A80862954D46E671AF6 /* Pods_sheetCheckAndCountWeekApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874A1FFD2E98C9C9D85CAA69 /* Pods_sheetCheckAndCountWeekApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F70C63D969117F5CB425BD7 /* Pods-sheetCheckAndCountWeekApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sheetCheckAndCountWeekApp.release.xcconfig"; path = "Target Support Files/Pods-sheetCheckAndCountWeekApp/Pods-sheetCheckAndCountWeekApp.release.xcconfig"; sourceTree = "<group>"; };
 		54568A95279226FF001B8373 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		548344652784F14400EA62A1 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		5483446727864AAA00EA62A1 /* LeftoverMedicineCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftoverMedicineCount.swift; sourceTree = "<group>"; };
@@ -36,6 +38,8 @@
 		54DCA4C6271D689B0083F5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54DCA4CF271D6C0B0083F5AD /* DaysCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysCount.swift; sourceTree = "<group>"; };
 		54DCA4D1271D70940083F5AD /* SheetCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetCount.swift; sourceTree = "<group>"; };
+		874A1FFD2E98C9C9D85CAA69 /* Pods_sheetCheckAndCountWeekApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sheetCheckAndCountWeekApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88989002B2994D9651A93A00 /* Pods-sheetCheckAndCountWeekApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sheetCheckAndCountWeekApp.debug.xcconfig"; path = "Target Support Files/Pods-sheetCheckAndCountWeekApp/Pods-sheetCheckAndCountWeekApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +47,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87C72A80862954D46E671AF6 /* Pods_sheetCheckAndCountWeekApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AA1D76D91E258434A8506DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				874A1FFD2E98C9C9D85CAA69 /* Pods_sheetCheckAndCountWeekApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		548344642784EFA500EA62A1 /* Styles */ = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +92,8 @@
 			children = (
 				54DCA4BC271D68980083F5AD /* sheetCheckAndCountWeekApp */,
 				54DCA4BB271D68980083F5AD /* Products */,
+				586132E87EEF53A74C819577 /* Pods */,
+				0AA1D76D91E258434A8506DE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +140,16 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		586132E87EEF53A74C819577 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				88989002B2994D9651A93A00 /* Pods-sheetCheckAndCountWeekApp.debug.xcconfig */,
+				0F70C63D969117F5CB425BD7 /* Pods-sheetCheckAndCountWeekApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +157,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54DCA4C9271D689B0083F5AD /* Build configuration list for PBXNativeTarget "sheetCheckAndCountWeekApp" */;
 			buildPhases = (
+				7E1FFDE1949526CC8BC27150 /* [CP] Check Pods Manifest.lock */,
 				54DCA4B6271D68980083F5AD /* Sources */,
 				54DCA4B7271D68980083F5AD /* Frameworks */,
 				54DCA4B8271D68980083F5AD /* Resources */,
+				FE03289B35B1EAA603D302CE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,6 +215,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7E1FFDE1949526CC8BC27150 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-sheetCheckAndCountWeekApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE03289B35B1EAA603D302CE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sheetCheckAndCountWeekApp/Pods-sheetCheckAndCountWeekApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-sheetCheckAndCountWeekApp/Pods-sheetCheckAndCountWeekApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-sheetCheckAndCountWeekApp/Pods-sheetCheckAndCountWeekApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		54DCA4B6271D68980083F5AD /* Sources */ = {
@@ -328,6 +397,7 @@
 		};
 		54DCA4CA271D689B0083F5AD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88989002B2994D9651A93A00 /* Pods-sheetCheckAndCountWeekApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -350,6 +420,7 @@
 		};
 		54DCA4CB271D689B0083F5AD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F70C63D969117F5CB425BD7 /* Pods-sheetCheckAndCountWeekApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
