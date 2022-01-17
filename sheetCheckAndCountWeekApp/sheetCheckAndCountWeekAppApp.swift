@@ -12,7 +12,7 @@ import GoogleMobileAds
 
 // ApDelegateクラスの定義
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLanchingWithOptions lanchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions lanchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Mobile_Ads_SDKの初期化
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
