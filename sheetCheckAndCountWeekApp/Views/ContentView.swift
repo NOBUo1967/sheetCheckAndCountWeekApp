@@ -42,7 +42,11 @@ struct ContentView: View {
                         }
                         Text("残薬計算")
                     }
-                
+                InformationPage()
+                    .tabItem {
+                        Image(systemName: "info.circle")
+                        Text("このアプリについて")
+                    }
                 
             } // TabView
             .accentColor(.red)
