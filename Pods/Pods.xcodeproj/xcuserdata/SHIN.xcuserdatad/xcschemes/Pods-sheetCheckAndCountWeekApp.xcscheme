@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "53583C1A7D01411F34BD743F4DE663BC"
-               BuildableName = "Pods-sheetCheckAndCountWeekApp.framework"
+               BuildableName = "Pods_sheetCheckAndCountWeekApp.framework"
                BlueprintName = "Pods-sheetCheckAndCountWeekApp"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
