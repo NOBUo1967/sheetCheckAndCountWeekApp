@@ -53,5 +53,9 @@
 	<string>Light</string>
 	<key>CFBundleDisplayName</key>
 	<string>日数と残薬計算</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-6680256433251064~8290476454</string>
+	<key>GADIsAdManagerApp</key>
+	<string>true</string>
 </dict>
 </plist>

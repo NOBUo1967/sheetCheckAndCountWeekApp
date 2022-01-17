@@ -15,36 +15,40 @@ struct ContentView: View {
     }
     
     var body: some View {
-        TabView {
-            DaysCount()
-                .tabItem {
-                    Image(systemName: "calendar")
-                    Text("日数計算")
-                }
-            AfterDateCount()
-                .tabItem {
-                    Image(systemName: "calendar.badge.plus")
-                    Text("何日後はいつ")
-                }
-            SheetCount()
-                .tabItem {
-                    Image(systemName: "pills.fill")
-                    Text("ヒート数計算")
-                }
-            
-            LeftoverMedicineCount()
-                .tabItem {
-                    if #available(iOS 15.0, *) {
-                        Image(systemName: "pills.circle")
-                    } else {
-                        Image(systemName: "pills")
+        VStack {
+            TabView {
+                DaysCount()
+                    .tabItem {
+                        Image(systemName: "calendar")
+                        Text("日数計算")
                     }
-                    Text("残薬計算")
-                }
-            
-            
-        } // TabView
-        .accentColor(.red)
+                AfterDateCount()
+                    .tabItem {
+                        Image(systemName: "calendar.badge.plus")
+                        Text("何日後はいつ")
+                    }
+                SheetCount()
+                    .tabItem {
+                        Image(systemName: "pills.fill")
+                        Text("ヒート数計算")
+                    }
+                
+                LeftoverMedicineCount()
+                    .tabItem {
+                        if #available(iOS 15.0, *) {
+                            Image(systemName: "pills.circle")
+                        } else {
+                            Image(systemName: "pills")
+                        }
+                        Text("残薬計算")
+                    }
+                
+                
+            } // TabView
+            .accentColor(.red)
+            // Banner広告を表示する
+            BannerAdView().frame(width: 320, height: 50)
+        } // VStack
     } // body
 }
 
