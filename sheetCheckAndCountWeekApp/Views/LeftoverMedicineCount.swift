@@ -147,10 +147,10 @@ struct LeftoverMedicineCount: View {
                 switch alertType {
                     // 入力値が誤っているケース
                 case .incorrectInputValue:
-                    return Alert(title: Text("正しい値を入力してください"), message: Text("処方日数には0以上の数字を入力してください"), dismissButton: .default(Text("OK")))
+                    return Alert(title: Text("正しい値を入力してください"), message: Text("処方日数には0以上の数字を\n入力してください"), dismissButton: .default(Text("OK")))
                     // 中断日が内服開始日より前の日付になっているケース
                 case .incorrectSelectedDate:
-                    return Alert(title: Text("正しい値を入力してください"), message: Text("中断日は内服開始日より後の日付を選択してください"), dismissButton: .default(Text("OK")))
+                    return Alert(title: Text("正しい値を入力してください"), message: Text("中断日は内服開始日より\n後の日付を選択してください"), dismissButton: .default(Text("OK")))
                     // 残薬数がマイナスになるケース
                 case .runOutMedicine:
                     return Alert(title: Text("処方日数が足りていません"), message: Text("何日間か内服できていなかった\n可能性があります"), dismissButton: .default(Text("OK")))
