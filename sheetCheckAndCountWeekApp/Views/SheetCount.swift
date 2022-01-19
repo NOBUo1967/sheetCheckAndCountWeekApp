@@ -112,7 +112,7 @@ struct SheetCount: View {
             }
             //
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("正しい値を入力してください"), message: Text("入力できる値は数値のみです\n1シートあたりの錠数に０は入力できません"), dismissButton: .default(Text("OK")))
+                Alert(title: Text("正しい値を入力してください"), message: Text("入力できる値は数値のみです\n1シートあたりの錠数に\n０は入力できません"), dismissButton: .default(Text("OK")))
             }
         } // ZStack
     } // body

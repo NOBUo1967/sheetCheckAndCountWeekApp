@@ -119,7 +119,7 @@ struct AfterDateCount: View {
             }
             // Alert部分
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("正しい値を入力してください"), message: Text("何日後には0以上の数字を入力してください"), dismissButton: .default(Text("OK")))
+                Alert(title: Text("正しい値を入力してください"), message: Text("何日後には0以上の数字を\n入力してください"), dismissButton: .default(Text("OK")))
             }
         } // ZStack
     } // body

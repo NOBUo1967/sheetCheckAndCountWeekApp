@@ -16,23 +16,7 @@ struct InformationPage: View {
                 .edgesIgnoringSafeArea(.all)
             Form {
                 Section {
-                    HStack {
-                        Text("バージョン")
-                        Spacer()
-                        Text("1.0")
-                    }
-                    
-                    HStack {
-                        Text("作者")
-                        Spacer()
-                        Text("NOBUo")
-                    }
-                } header: {
-                    Text("このアプリについて")
-                } // Section
-                
-                Section {
-                    Text("計算結果には細心の注意を払って開発をしていますが、計算に間違いがあった場合や入力間違いによって生じた損害に対し、当方は一切責任を負いかねますのであらかじめご了承ください。")
+                    Text("計算結果には細心の注意を払って\n開発をしていますが、\n計算に間違いがあった場合や\n入力間違いによって生じた損害に対し、\n当方は一切責任を負いかねますので\nあらかじめご了承ください。")
                 } header: {
                     Text("免責事項")
                 } footer: {

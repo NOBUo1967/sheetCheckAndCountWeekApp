@@ -45,7 +45,7 @@ struct ContentView: View {
                 InformationPage()
                     .tabItem {
                         Image(systemName: "info.circle")
-                        Text("このアプリについて")
+                        Text("情報")
                     }
                 
             } // TabView
