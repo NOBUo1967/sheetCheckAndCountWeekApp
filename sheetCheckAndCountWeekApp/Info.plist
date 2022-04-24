@@ -54,7 +54,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>日数と残薬計算</string>
 	<key>GADApplicationIdentifier</key>
-	<string>{UnitID}</string> // adMobユニットIDを取得して入力
+	<string>{UnitID}</string> <!-- adMobユニットIDを取得して入力 -->
 	<key>GADIsAdManagerApp</key>
 	<string>true</string>
 </dict>
